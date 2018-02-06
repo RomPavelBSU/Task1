@@ -1,0 +1,12 @@
+commit 3617796e4d25b9d1fbd528e1a0a7d1304019d2a9 (HEAD -> master)
+Author: Pavel Ramasheuski <rompasha2017@gmail.com>
+Date:   Tue Feb 6 17:46:31 2018 +0300
+
+    update status.txt
+
+commit b776783d2e0e8daf40481e9ed9375b9cc102b3b8
+Author: Pavel Ramasheuski <rompasha2017@gmail.com>
+Date:   Tue Feb 6 17:42:10 2018 +0300
+
+    add .gitignore
+
