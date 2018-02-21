@@ -5,54 +5,52 @@
 
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Timmana" rel="stylesheet">
 </head>
 
 <body>
     <div id="header">
+
         <div class="user-info">
-            <i class="user-logo material-icons">person</i>
+            <i class="user-logo material-icons">portrait</i>
             Username
         </div>
+
         <button class="btn btn-new-post">
             new post
         </button>
 
-
-
-        <button class="btn btn-log-out">
+        <button class="btn btn-sign-out">
             sign out
         </button>
+
         <img src="logo.jpg" width="75" alt="hotgram" id="photogram-logo">
     </div>
 
-    <div class="main">
-        <div class="filters-block">
-            Filters
-            <div class="filters-container">
-                <input type="text" class=filter>
-                <input type="text" class=filter>
-                <input type="text" class=filter>
-            </div>
+    <div class="filters-block">
+        Filters
+        <div class="filters-container">
+            <input type="text" placeholder="username" class=filter>
+            <input type="text" placeholder="data" class=filter>
+            <input type="text" placeholder="#hashtags" class=filter>
         </div>
+    </div>
+
+    <div class="main">
+
         <div class="feed">
             <div class="post">
                 <div class="photo-toolbar">
-                    <div class="foto-upload-data">
+                    <div class="photo-upload-data">
                         17:00 / 12.12.2017
                     </div>
-                    <div>L</div>
-                    <div class="edit-icon">
-                        E
-                    </div>
-                    <div>U</div>
-                    <div class="delete-icon">
-                        delete
-                    </div>
+                    <i class="like-icon material-icons">favorite_border</i>
+                    <i class="edit-icon material-icons">mode_edit</i>
+                    <div class="photo-username">Username</div>
+                    <i class="delete-icon material-icons">delete</i>
                 </div>
-                <div class="photo">
-                    <img src="exadel2.jpg" width="380" alt="photo">
-                </div>
+                <img src="exadel2.jpg" width="380" alt="photo">
                 <div class="photo-info">
                     <div class="description">
                         My First Trip))) Iam very happy
@@ -64,21 +62,15 @@
             </div>
             <div class="post">
                 <div class="photo-toolbar">
-                    <div class="foto-upload-data">
+                    <div class="photo-upload-data">
                         17:00 / 12.12.2017
                     </div>
-                    <div>L</div>
-                    <div class="edit-icon">
-                        E
-                    </div>
-                    <div>U</div>
-                    <div class="delete-icon">
-                        delete
-                    </div>
+                    <i class="like-icon material-icons">favorite_border</i>
+                    <i class="edit-icon material-icons">mode_edit</i>
+                    <div class="photo-username">Username</div>
+                    <i class="delete-icon material-icons">delete</i>
                 </div>
-                <div class="photo">
-                    <img src="exadel.jpg" width="380" alt="photo">
-                </div>
+                <img src="exadel.jpg" width="380" alt="photo">
                 <div class="photo-info">
                     <div class="description">
                         description
@@ -90,21 +82,15 @@
             </div>
             <div class="post">
                 <div class="photo-toolbar">
-                    <div class="foto-upload-data">
+                    <div class="photo-upload-data">
                         17:00 / 12.12.2017
                     </div>
-                    <div>L</div>
-                    <div class="edit-icon">
-                        E
-                    </div>
-                    <div>U</div>
-                    <div class="delete-icon">
-                        delete
-                    </div>
+                    <i class="like-icon material-icons">favorite_border</i>
+                    <i class="edit-icon material-icons">mode_edit</i>
+                    <div class="photo-username">Username</div>
+                    <i class="delete-icon material-icons">delete</i>
                 </div>
-                <div class="photo">
-                    <img src="exadel1.jpg" width="380" alt="photo">
-                </div>
+                <img src="exadel1.jpg" width="380" alt="photo">
                 <div class="photo-info">
                     <div class="description">
                         description
@@ -114,14 +100,36 @@
                     </div>
                 </div>
             </div>
-
+            <div class="post">
+                <div class="photo-toolbar">
+                    <div class="photo-upload-data">
+                        17:00 / 12.12.2017
+                    </div>
+                    <i class="like-icon material-icons">favorite_border</i>
+                    <i class="edit-icon material-icons">mode_edit</i>
+                    <div class="photo-username">Username</div>
+                    <i class="delete-icon material-icons">delete</i>
+                </div>
+                <img src="order.jpg" width="380" alt="photo">
+                <div class="photo-info">
+                    <div class="description">
+                        Im tired of verstka
+                    </div>
+                    <div class="hashtags">
+                        #FrontEndOneLove
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-load-more">
+                load more
+            </button>
         </div>
         <div id="footer">
             <div class="photogram-name">
                 #PHOTOGRAM
             </div>
             <div class="update-string">
-                Last Update: 15/02/2018
+                Last Update: 21/02/2018
             </div>
             <div class="contacts-info">
                 <p>Contacts: Pavel Ramasheuski Group:5</p>
