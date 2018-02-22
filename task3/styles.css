@@ -1,31 +1,18 @@
-    html,body {
+    
+    html,body, main {
     margin: 0px 0px 0px 0px;
     height: 100%;
     }
 
-    .main{
-      height:100%;
-      display: flex;
-      flex-direction: column;
-
-    }
-    * {
+    *{
         font-family: 'Timmana', sans-serif; 
         outline:none; 
     }
-    #header{
-        position: fixed;
-        width: 100%;
-        height: 70px;
-        display:flex;
-        align-items: center; 
-        border:2px solid #3d051b23;
-        background-color:white;
-        border-radius: 4px;
-    }
+
     .material-icons, .btn{
         cursor: pointer;
     }
+
     .btn{
         font-family: 'Timmana', sans-serif;
         font-size:20px;
@@ -34,9 +21,25 @@
         color: white;
         width: 100px;
         height: 40px;
-        vertical-align: middle;
+        
         margin:auto;
     }
+
+    #header{
+        position: fixed;
+        width: 100%;
+        height: 70px;
+        border:2px solid #3d051b23;
+        border-radius: 4px;
+        background-color: white;
+        display:flex; 
+    }
+   
+    #main{
+        display: flex;
+        flex-direction: column;
+    }
+
     .btn-new-post{
         background-color:#3d051bc0;
         margin-left: 40px;
@@ -54,10 +57,11 @@
         color: #3d051bc0;
     }
     .btn-load-more:hover{
-        background: #3d051b0e;
+        background: #3d051b17;
     }
+
  
-    .user-info{
+    #user-info{
         margin: 4px auto auto auto;
         font-size: 25px;
         color:rgba(0, 0, 0, 0.767);
@@ -68,53 +72,41 @@
     .user-logo{
         font-size: 35px;
     }
-   
-    @media screen and (max-width: 950px) { 
-        .filters-block,
-        .update-string
-      {
-            display:none;
-      } 
-      
-    }
-    @media screen and (max-width: 600px) { 
-        
-        #photogram-logo,  
-        .contacts-info * {
-            display:none;
-        }
-        .contacts-info *{
-            width:auto;
-        } 
-        .btn-new-post, .btn-sign-out{
-            margin:auto;
-        }
-    }
-    .filters-block{
+
+    #filters-container{
         position:fixed;
-        margin-top:150px;
+        margin-top:130px;
         margin-left:75%;
         margin-right:10%;
         width: 220px;
         color:rgba(0, 0, 0, 0.637);
         font-size: 40px;
-    }
-    .filters-container{
         display: flex;
         flex-direction: column;
-    }
-    .filter{
-        margin: 10px 0px 10px 0px;
-        border-radius: 10px;
-        color: rgb(0, 0, 0);
-    }
-    input{
-        padding-top: 3px;
+        
     }
     ::-webkit-input-placeholder {
         color:rgba(0, 0, 0, 0.336);
     }
-    .feed{
+    .filter{
+        padding-top: 3px;
+        margin: 10px 0px 10px 0px;
+        border-radius: 10px;
+        color: rgb(0, 0, 0);
+    }
+    .filters-by-date{
+        align-items: center;
+        font-size:15px;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .filt-by-date{
+        margin:10px 5px 10px 5px;
+        width: 75px;
+    }
+   
+   
+    #feed{
         align-items: center;
         flex: 1 0 auto;
         margin-left:auto;
@@ -125,14 +117,14 @@
     }
     #footer{
         background-color:  #3d051b09;
-        flex: 0 0 auto;
+        flex: 1 0 auto;
         height:120px;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    .photogram-name{
-        margin:40px 0px 20px 50px;
+    #photogram-name{
+        margin:20px 0px 0px 50px;
         width: 30%;
         font-size:60px;
         color: #004e63
@@ -152,7 +144,7 @@
     }
     .contacts-info{
         display: flex;
-        width: 30%;
+        width: 32%;
         flex-direction: column;
         margin-right: 30px;
         color:rgba(0, 0, 0, 0.651);
@@ -172,38 +164,49 @@
         border-radius: 10px;
         background-color: #3d051b17;
     }
-    .photo-toolbar{
+    .post-toolbar{
          display: flex;
+         width:100%;
          justify-content: space-between;
          margin-bottom: 5px;
     }
     .like-icon{
-        margin-left: 14%;
+        color:rgb(150, 3, 3);
+        margin-left: 16%;
+        margin-right: 8%;
         font-size: 30px;
     }
-    .edit-icon{
-        margin-left: 11%;
-    }
-    .photo-upload-data{
+    .post-upload-data{
         padding-top:5px;
+        
+        color:rgba(0, 0, 0, 0.753);
     }
-    .photo-username{
+    .post-username{
        padding-top:5px;
+       color:black;
     }
- 
+    .delete-icon{
+        font-size: 30px;
+        color:rgba(0, 0, 0, 0.623);
+    }
+    .edit-icon{
+        color:rgba(0, 0, 0, 0.623);
+        font-size: 30px;
+    }
  
     
     img{
+        width:100%;
         border: 2px solid #3d051b49;
         border-radius: 10px;
     }
-    .photo-info{
+    .post-info{
         flex: auto;
         margin-top:10px;
         display:flex;
         justify-content: space-between;
     }
-    .photo-info *{
+    .post-info *{
         font-family: 'Alegreya Sans SC', sans-serif;
         font-size: 13px;
         background-color: white;
@@ -223,3 +226,62 @@
         width: 34%;
         color:#004e63;
     }
+    @media screen and (max-width: 950px) { 
+        #feed{
+            margin-top:140px;
+        } 
+          .update-string,
+          #filt-cont-text
+        {
+              display:none;
+        } 
+        #filters-container{
+          margin: 70px 0 0 0;
+          padding: 10px 0px 10px 0px;
+          width: 100%;
+          background-color: white;
+          border:2px solid #3d051b23;
+          border-radius: 2px;
+          flex-direction: row;
+          justify-content: space-around;
+        }
+        .filter{
+            width:30%;
+        }
+        .filters-by-date{
+            width:30%;
+        }
+        .filt-by-date{
+            margin:0;
+            width: 50%;
+       
+        }
+   
+      
+      }
+      @media screen and (max-width: 600px) { 
+        #feed{
+            margin-top:160px;
+        } 
+        .filters-by-date{
+            flex-direction: column;
+            font-size: 0px;
+        }
+        .filt-by-date{
+            width: 100%;
+            margin-bottom:5px;
+        }
+          #photogram-logo,  
+          .contacts-info * {
+              display:none;
+          }
+          .btn-new-post, .btn-sign-out{
+              margin:auto;
+          }
+          .post-upload-data{
+              font-size: 15px;
+          }
+      }
+   
+  
+      

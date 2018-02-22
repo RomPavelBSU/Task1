@@ -4,6 +4,8 @@
 <html>
 
 <head>
+    <title>Photogram</title>
+    <link rel="shortcut icon" href="small_logo.jpg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Timmana" rel="stylesheet">
@@ -12,7 +14,7 @@
 <body>
     <div id="header">
 
-        <div class="user-info">
+        <div id="user-info">
             <i class="user-logo material-icons">portrait</i>
             Username
         </div>
@@ -28,30 +30,39 @@
         <img src="logo.jpg" width="75" alt="hotgram" id="photogram-logo">
     </div>
 
-    <div class="filters-block">
-        Filters
-        <div class="filters-container">
-            <input type="text" placeholder="username" class=filter>
-            <input type="text" placeholder="data" class=filter>
-            <input type="text" placeholder="#hashtags" class=filter>
+    <div id="filters-container">
+        <div id="filt-cont-text">
+            Filters
         </div>
+
+        <input type="text" class="filter" placeholder="username">
+
+        <input type="text" class=filter placeholder="#hashtags">
+
+        <div class="filters-by-date">
+            from:
+            <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy">
+             to:
+            <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy">
+        </div>
+
     </div>
 
-    <div class="main">
+    <div id="main">
 
-        <div class="feed">
+        <div id="feed">
             <div class="post">
-                <div class="photo-toolbar">
-                    <div class="photo-upload-data">
+                <div class="post-toolbar">
+                    <div class="post-upload-data">
                         17:00 / 12.12.2017
                     </div>
                     <i class="like-icon material-icons">favorite_border</i>
                     <i class="edit-icon material-icons">mode_edit</i>
-                    <div class="photo-username">Username</div>
+                    <div class="post-username">Username</div>
                     <i class="delete-icon material-icons">delete</i>
                 </div>
                 <img src="exadel2.jpg" width="380" alt="photo">
-                <div class="photo-info">
+                <div class="post-info">
                     <div class="description">
                         My First Trip))) Iam very happy
                     </div>
@@ -61,17 +72,17 @@
                 </div>
             </div>
             <div class="post">
-                <div class="photo-toolbar">
-                    <div class="photo-upload-data">
+                <div class="post-toolbar">
+                    <div class="post-upload-data">
                         17:00 / 12.12.2017
                     </div>
                     <i class="like-icon material-icons">favorite_border</i>
                     <i class="edit-icon material-icons">mode_edit</i>
-                    <div class="photo-username">Username</div>
+                    <div class="post-username">Username</div>
                     <i class="delete-icon material-icons">delete</i>
                 </div>
                 <img src="exadel.jpg" width="380" alt="photo">
-                <div class="photo-info">
+                <div class="post-info">
                     <div class="description">
                         description
                     </div>
@@ -81,17 +92,17 @@
                 </div>
             </div>
             <div class="post">
-                <div class="photo-toolbar">
-                    <div class="photo-upload-data">
+                <div class="post-toolbar">
+                    <div class="post-upload-data">
                         17:00 / 12.12.2017
                     </div>
                     <i class="like-icon material-icons">favorite_border</i>
                     <i class="edit-icon material-icons">mode_edit</i>
-                    <div class="photo-username">Username</div>
+                    <div class="post-username">Username</div>
                     <i class="delete-icon material-icons">delete</i>
                 </div>
                 <img src="exadel1.jpg" width="380" alt="photo">
-                <div class="photo-info">
+                <div class="post-info">
                     <div class="description">
                         description
                     </div>
@@ -101,17 +112,17 @@
                 </div>
             </div>
             <div class="post">
-                <div class="photo-toolbar">
-                    <div class="photo-upload-data">
+                <div class="post-toolbar">
+                    <div class="post-upload-data">
                         17:00 / 12.12.2017
                     </div>
                     <i class="like-icon material-icons">favorite_border</i>
                     <i class="edit-icon material-icons">mode_edit</i>
-                    <div class="photo-username">Username</div>
+                    <div class="post-username">Username</div>
                     <i class="delete-icon material-icons">delete</i>
                 </div>
                 <img src="order.jpg" width="380" alt="photo">
-                <div class="photo-info">
+                <div class="post-info">
                     <div class="description">
                         Im tired of verstka
                     </div>
@@ -125,7 +136,7 @@
             </button>
         </div>
         <div id="footer">
-            <div class="photogram-name">
+            <div id="photogram-name">
                 #PHOTOGRAM
             </div>
             <div class="update-string">
