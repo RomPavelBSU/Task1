@@ -5,6 +5,7 @@
 
 <head>
     <title>Photogram</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="small_logo.jpg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
@@ -12,9 +13,9 @@
 </head>
 
 <body>
-    <div id="header">
+    <div class="header">
 
-        <div id="user-info">
+        <div class="user-info">
             <i class="user-logo material-icons">portrait</i>
             Username
         </div>
@@ -27,11 +28,11 @@
             sign out
         </button>
 
-        <img src="logo.jpg" width="75" alt="hotgram" id="photogram-logo">
+        <img src="logo.jpg" width="75" alt="hotgram" class="photogram-logo">
     </div>
 
-    <div id="filters-container">
-        <div id="filt-cont-text">
+    <div class="filters-container">
+        <div class="filt-cont-text">
             Filters
         </div>
 
@@ -42,15 +43,15 @@
         <div class="filters-by-date">
             from:
             <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy">
-             to:
+            to:
             <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy">
         </div>
 
     </div>
 
-    <div id="main">
+    <div class="main">
 
-        <div id="feed">
+        <div class="feed">
             <div class="post">
                 <div class="post-toolbar">
                     <div class="post-upload-data">
@@ -135,12 +136,12 @@
                 load more
             </button>
         </div>
-        <div id="footer">
-            <div id="photogram-name">
+        <div class="footer">
+            <div class="photogram-name">
                 #PHOTOGRAM
             </div>
             <div class="update-string">
-                Last Update: 21/02/2018
+                Last Update: 25/02/2018
             </div>
             <div class="contacts-info">
                 <p>Contacts: Pavel Ramasheuski Group:5</p>
