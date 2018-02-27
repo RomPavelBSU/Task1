@@ -81,10 +81,10 @@
             likes: ['exadel', 'epam']
         },
         {
-            id: 9,
-            description: 'not valid post',
-            createdAt: "25 december",
-            author: 5,
+            id: '9',
+            description: 'valid post',
+            createdAt: new Date(1999, 10, 10, 10, 10),
+            author: "RomPavel",
             photoLink: 'photogram',
             hashTags: ['#Photo4Photo', '#dinero', '#ECMAbetterThanVerstka'],
             likes: ['exadel', 'epam']
@@ -123,7 +123,7 @@
             }
 
             var sortedPhotoPosts = [].sort.call(this, (post1, post2) => {
-                return post1.createdAt - post2.createdAt;
+                return post2.createdAt - post1.createdAt;
             });
 
             if (filterConfig !== undefined && typeof filterConfig === "object") {
