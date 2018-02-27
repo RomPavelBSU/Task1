@@ -103,24 +103,13 @@
     ]
 
     photoPosts.__proto__ = {
-        getPhotoPosts: function (skip, top, filterConfig) {
-            if (arguments.length == 0) {
-                skip = 0;
-                top = 10;
+        getPhotoPosts: function (skip = 0, top = 10, filterConfig) {
+
+            if (typeof skip !== "number" || typeof top !== "number") {
+                console.log("Invalid argument in getPhotoPosts");
+                return;
             }
-            else if (arguments.length === 1) {
-                if (typeof skip !== "number") {
-                    console.log("Invalid argument in getPhotoPosts");
-                    return;
-                }
-                top = 10;
-            }
-            else if (arguments.length === 2) {
-                if (typeof skip !== "number" || typeof top !== "number") {
-                    console.log("Invalid argument in getPhotoPosts");
-                    return;
-                }
-            }
+
 
             var sortedPhotoPosts = [].sort.call(this, (post1, post2) => {
                 return post2.createdAt - post1.createdAt;
@@ -247,6 +236,8 @@
     console.log(photoPosts.getPhotoPosts());
     console.log("3 posts start from the second:");
     console.log(photoPosts.getPhotoPosts(1, 3));
+    console.log("skip = 6 and default-argument for top:");
+    console.log(photoPosts.getPhotoPosts(6));
     console.log("posts after filtering:");
     console.log(photoPosts.getPhotoPosts(0, 10, filterConfig));
 
@@ -257,8 +248,8 @@
     console.log("-getPhotoPost");
     console.log("post with id 2:");
     console.log(photoPosts.getPhotoPost('2'));
-    console.log("post with id 9:");
-    console.log(photoPosts.getPhotoPost('9'));
+    console.log("post with id 11:");
+    console.log(photoPosts.getPhotoPost('11'));
     console.log("with invalid argument:");
     console.log(photoPosts.getPhotoPost(100));
 
