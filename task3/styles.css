@@ -172,24 +172,26 @@
     }
     .like-icon{
         color:rgb(150, 3, 3);
-        margin-left: 16%;
-        margin-right: 8%;
+        width:7%;
         font-size: 30px;
     }
     .post-upload-data{
         padding-top:5px;
-        
+        width:45%;
         color:rgba(0, 0, 0, 0.753);
     }
     .post-username{
        padding-top:5px;
        color:black;
+       width:17%;
     }
     .delete-icon{
+        width:7%;
         font-size: 30px;
         color:rgba(0, 0, 0, 0.623);
     }
     .edit-icon{
+        width:7%;
         color:rgba(0, 0, 0, 0.623);
         font-size: 30px;
     }
@@ -237,7 +239,6 @@
         } 
         .filters-container{
           margin: 70px 0 0 0;
-          padding: 10px 0px 10px 0px;
           width: 100%;
           background-color: white;
           border:2px solid #3d051b23;
@@ -260,7 +261,11 @@
       
     }
     @media screen and (max-width: 610px) { 
+        .post{
+            width: 70%;
+        }
         .photogram-name{
+            margin-left: 5%;
             font-size: 45px;
         }
         .feed{
@@ -273,7 +278,7 @@
             font-size: 25px;
         }
         .post-toolbar{
-            font-size:15px;
+            font-size:13px;
         }
         .filters-by-date{
             flex-direction: column;
@@ -282,7 +287,8 @@
         .filt-by-date{
             
             width: 100%;
-            margin-bottom:5px;
+            margin-bottom:2px;
+            margin-top: 2px;
         }
           .photogram-logo,  
           .contacts-info * {
