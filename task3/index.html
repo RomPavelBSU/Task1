@@ -5,12 +5,13 @@
 
 <head>
     <title>Photogram</title>
-    <script src="../task4/main.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="small_logo.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="pic/small_logo.jpg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Timmana" rel="stylesheet">
+    <script src="../task4/main.js"></script>
+
 </head>
 
 <body>
@@ -29,7 +30,7 @@
             sign out
         </button>
 
-        <img src="logo.jpg" width="75" alt="hotgram" class="photogram-logo">
+        <img src="pic/logo.jpg" width="75" alt="hotgram" class="photogram-logo">
     </div>
 
     <div class="filters-container">
@@ -43,8 +44,7 @@
 
         <div class="filters-by-date">
             from:
-            <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy">
-            to:
+            <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy"> to:
             <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy">
         </div>
 
@@ -53,104 +53,28 @@
     <div class="main">
 
         <div class="feed">
-            <div class="post">
-                <div class="post-toolbar">
-                    <div class="post-upload-data">
-                        17:00 / 12.12.2017
-                    </div>
-                    <i class="like-icon material-icons">favorite_border</i>
-                    <i class="edit-icon material-icons">mode_edit</i>
-                    <div class="post-username">Username</div>
-                    <i class="delete-icon material-icons">delete</i>
-                </div>
-                <img src="exadel2.jpg" width="380" alt="photo">
-                <div class="post-info">
-                    <div class="description">
-                        My First Trip))) Iam very happy
-                    </div>
-                    <div class="hashtags">
-                        #IamHappy #ReallyIamVeryHappy
-                    </div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post-toolbar">
-                    <div class="post-upload-data">
-                        17:00 / 12.12.2017
-                    </div>
-                    <i class="like-icon material-icons">favorite_border</i>
-                    <i class="edit-icon material-icons">mode_edit</i>
-                    <div class="post-username">Username</div>
-                    <i class="delete-icon material-icons">delete</i>
-                </div>
-                <img src="exadel.jpg" width="380" alt="photo">
-                <div class="post-info">
-                    <div class="description">
-                        description
-                    </div>
-                    <div class="hashtags">
-                        hastags
-                    </div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post-toolbar">
-                    <div class="post-upload-data">
-                        17:00 / 12.12.2017
-                    </div>
-                    <i class="like-icon material-icons">favorite_border</i>
-                    <i class="edit-icon material-icons">mode_edit</i>
-                    <div class="post-username">Username</div>
-                    <i class="delete-icon material-icons">delete</i>
-                </div>
-                <img src="exadel1.jpg" width="380" alt="photo">
-                <div class="post-info">
-                    <div class="description">
-                        description
-                    </div>
-                    <div class="hashtags">
-                        hastags
-                    </div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post-toolbar">
-                    <div class="post-upload-data">
-                        17:00 / 12.12.2017
-                    </div>
-                    <i class="like-icon material-icons">favorite_border</i>
-                    <i class="edit-icon material-icons">mode_edit</i>
-                    <div class="post-username">Username</div>
-                    <i class="delete-icon material-icons">delete</i>
-                </div>
-                <img src="order.jpg" width="380" alt="photo">
-                <div class="post-info">
-                    <div class="description">
-                        Im tired of verstka
-                    </div>
-                    <div class="hashtags">
-                        #FrontEndOneLove
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-load-more">
-                load more
-            </button>
+
+
         </div>
+
+        <button class="btn btn-load-more" onclick="pressLoadMoreButton()">
+            load more
+        </button>
         <div class="footer">
             <div class="photogram-name">
                 #PHOTOGRAM
             </div>
             <div class="update-string">
-                Last Update: 26/02/2018
+                Last Update: 08/03/2018
             </div>
             <div class="contacts-info">
                 <p>Contacts: Pavel Ramasheuski Group:5</p>
                 <p>Email: pavel.ramasheusi@gmail.com</p>
             </div>
         </div>
-
     </div>
+    
 </body>
+<script src="../task5/src.js"></script>
 
 </html>

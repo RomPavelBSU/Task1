@@ -1,14 +1,24 @@
     
-    html,body, main {
+    body, html{
+        height: 100%;
     margin: 0px 0px 0px 0px;
-    height: 100%;
+    
     }
+    .main{
+        min-height: 100% !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+  
+   
 
     *{
         font-family: 'Timmana', sans-serif; 
         outline:none; 
     }
-
+ 
     .material-icons, .btn{
         cursor: pointer;
     }
@@ -33,13 +43,7 @@
         border-radius: 4px;
         background-color: white;
         display:flex; 
-    }
-   
-    .main{
-        display: flex;
-        flex-direction: column;
-    }
-
+    }   
     .btn-new-post{
         background-color:#3d051bc0;
         margin-left: 40px;
@@ -49,6 +53,9 @@
         background-color:#00a5d383;
         margin-right: 40px;
 
+    }
+    .btn-sign-in{
+        background-color:#00a5d383;
     }
     .btn-load-more{
         margin-bottom: 80px;
@@ -62,7 +69,8 @@
 
  
     .user-info{
-        margin: 4px auto auto auto;
+        width:100px;
+        margin: 4px auto 4px auto;
         font-size: 25px;
         color:rgba(0, 0, 0, 0.767);
         display: flex;
@@ -108,6 +116,7 @@
    
     .feed{
         align-items: center;
+        min-height: 80%;
         flex: 1 0 auto;
         margin-left:auto;
         margin-right:auto;
@@ -117,7 +126,7 @@
     }
     .footer{
         background-color:  #3d051b09;
-        flex: 1 0 auto;
+        flex: 0 0  auto;
         height:120px;
         display: flex;
         justify-content: space-between;
@@ -132,7 +141,7 @@
     .photogram-logo{
         margin:auto;
         border: 0px;
-        width:92.17px;
+        width:100px;
 
     }
    
@@ -155,7 +164,7 @@
     }
     .post{
         max-width: 384px;
-        max-height: 800px;
+        max-height: 600px;
         display: flex;
         align-self: center;
         flex-direction: column;
@@ -170,7 +179,13 @@
          justify-content: space-between;
          margin-bottom: 5px;
     }
+    .post-toolbar-user{
+        display: flex;
+        justify-content: flex-end;
+        width:45%;
+    }
     .like-icon{
+        align-self: auto;
         color:rgb(150, 3, 3);
         width:7%;
         font-size: 30px;
@@ -181,17 +196,19 @@
         color:rgba(0, 0, 0, 0.753);
     }
     .post-username{
+
+       text-align: center;
        padding-top:5px;
        color:black;
-       width:17%;
+       flex: 0;
     }
     .delete-icon{
-        width:7%;
+        width:20%;
         font-size: 30px;
         color:rgba(0, 0, 0, 0.623);
     }
     .edit-icon{
-        width:7%;
+        width:20%;
         color:rgba(0, 0, 0, 0.623);
         font-size: 30px;
     }
@@ -199,6 +216,7 @@
     
     img{
         width:99%;
+        max-height: 400px;
         border: 2px solid #3d051b49;
         border-radius: 10px;
     }
@@ -261,15 +279,14 @@
       
     }
     @media screen and (max-width: 610px) { 
-        .post{
-            width: 70%;
-        }
+   
         .photogram-name{
             margin-left: 5%;
             font-size: 45px;
         }
         .feed{
             margin-top:160px;
+            width: 90%;
         } 
         .delete-icon,.edit-icon{
             font-size: 22px;
