@@ -1,6 +1,19 @@
-const ServerModule = (function () {
-    return {
+let _id = 0;
+class Post {
+    constructor(author, createdAt, photoLink, likes, discription, hashTags) {
+        this.id = String(_id++);
+        this.createdAt = createdAt;
+        this.photoLink = photoLink;
+        this.author = author;
+        this.discription = discription;
+        this.hashTags = hashTags;
+        this.likes = likes;
+    }
+}
 
+const ServerModule = (function () {
+    
+    return {
         getPhotoPosts(skip = 0, top = 10, filterConfig) {
 
             if (typeof skip !== "number" || typeof top !== "number") {
@@ -55,7 +68,7 @@ const ServerModule = (function () {
 
             if (this.some((el) => el.id === post.id))
                 return false;
-            if (typeof post.description !== "string" || post.description === "")
+            if (typeof post.discription !== "string" || post.discription === "")
                 return false;
             if (!(post.createdAt instanceof Date))
                 return false;
@@ -76,7 +89,7 @@ const ServerModule = (function () {
                 return false;
             }
 
-            if (editPost.hasOwnProperty("description")) {
+            if (editPost.hasOwnProperty("discription")) {
                 if (typeof editPost.description !== "string" || editPost.description === "")
                     return false;
             }
@@ -119,8 +132,8 @@ const ServerModule = (function () {
                     return false;
                 }
 
-                if (editPost.hasOwnProperty("description")) {
-                    post.description = editPost.description;
+                if (editPost.hasOwnProperty("discription")) {
+                    post.discription = editPost.discription;
                 }
                 if (editPost.hasOwnProperty("photoLink")) {
                     post.photoLink = editPost.photoLink;
@@ -156,281 +169,48 @@ const ServerModule = (function () {
     }
 })();
 
-const photoPosts = [
-    {
-        id: '1',
-        description: 'Hello',
-        createdAt: new Date(2012, 10, 19, 23, 12),
-        author: 'StefanoGrande',
-        photoLink: 'pic/barokko.jpg',
-        hashTags: ['#Photo4Photo', '#dinero', "#JSbetterThanVerstka", "#photogram"],
-        likes: ['MartaCapelli', 'StefanoGrande', 'HTP']
-    },
-    {
-        id: '2',
-        description: 'Goobye',
-        createdAt: new Date(2013, 10, 19, 23, 12),
-        author: 'epam',
-        photoLink: 'pic/barokko1.jpg',
-        hashTags: ['#Photo4Photo', '#dinero'],
-        likes: ['MartaCapelli', 'HTP']
-    },
-    {
-        id: '3',
-        description: 'Hello, how are u?',
-        createdAt: new Date(2011, 10, 19, 23, 12),
-        author: 'MartaCapelli',
-        photoLink: 'pic/barokko2.jpg',
-        hashTags: ['#dinero'],
-        likes: ['RomPavel' ,'StefanoGrande']
-    },
-    {
-        id: '4',
-        description: 'Hello',
-        createdAt: new Date(2012, 12, 31, 23, 12),
-        author: 'MartaCapelli',
-        photoLink: 'pic/barokko3.jpg',
-        hashTags: ['#Photo4Photo'],
-        likes: ['MartaCapelli', 'HTP']
-    },
-    {
-        id: '5',
-        description: 'You read all of descriotions?',
-        createdAt: new Date(2012, 10, 19, 23, 12),
-        author: 'junior',
-        photoLink: 'pic/barokko4.jpg',
-        hashTags: ['#dinero', '#cash'],
-        likes: ['MartaCapelli', 'HTP']
-    },
-    {
-        id: '6',
-        description: 'Really?',
-        createdAt: new Date(2005, 10, 19, 23, 12),
-        author: 'RomPavel',
-        photoLink: 'pic/exadel.jpg',
-        hashTags: ['#Photo4Photo',],
-        likes: [ 'StefanoGrande', 'HTP']
-    },
-    {
-        id: '7',
-        description: 'my respect',
-        createdAt: new Date(2002, 10, 19, 23, 12),
-        author: 'exadel',
-        photoLink: 'pic/exadel1.jpg',
-        hashTags: ['#Photo4Photo', '#dinero'],
-        likes: [ 'StefanoGrande', 'HTP']
-    },
-    {
-        id: '8',
-        description: 'But it seems to me that this is not the right time management',
-        createdAt: new Date(2011, 11, 19, 23, 12),
-        author: 'RomPavel',
-        photoLink: 'pic/exadel2.jpg',
-        hashTags: ['#Photo4Photo', '#dinero', '#JSbetterThanVerstka'],
-        likes: ['exadel', 'StefanoGrande']
-    },
-    {
-        id: '9',
-        description: 'valid post',
-        createdAt: new Date(1999, 10, 10, 10, 10),
-        author: "RomPavel",
-        photoLink: 'pic/exadel.jpg',
-        hashTags: ['#Photo4Photo', '#dinero', '#ECMAbetterThanVerstka'],
-        likes: ['StefanoGrande']
+const photoPosts = [];
 
-    },
-    {
-        id: '10',
-        description: 'valid post',
-        createdAt: new Date(2015, 11, 18, 23, 12),
-        author: 'BSU',
-        photoLink: 'pic/exadel1.jpg',
-        hashTags: ['#Photo4Photo', '#ECMAbetterThanVerstka'],
-        likes: ['exadel']
+for (method in ServerModule) {
+    photoPosts.__proto__[method] = ServerModule[method];
+}
 
-    },
-    {
-        id: '11',
-        description: 'Hello',
-        createdAt: new Date(2012, 10, 19, 23, 12),
-        author: 'StefanoGrande',
-        photoLink: 'pic/barokko.jpg',
-        hashTags: ['#Photo4Photo', '#dinero', "#JSbetterThanVerstka", "#photogram"],
-        likes: ['MartaCapelli', 'StefanoGrande', 'HTP']
-    },
-    {
-        id: '12',
-        description: 'Goobye',
-        createdAt: new Date(2013, 10, 19, 23, 12),
-        author: 'epam',
-        photoLink: 'pic/barokko1.jpg',
-        hashTags: ['#Photo4Photo', '#dinero'],
-        likes: ['MartaCapelli', 'HTP']
-    },
-    {
-        id: '13',
-        description: 'Hello, how are u?',
-        createdAt: new Date(2011, 10, 19, 23, 12),
-        author: 'MartaCapelli',
-        photoLink: 'pic/barokko2.jpg',
-        hashTags: ['#dinero'],
-        likes: ['RomPavel' ,'StefanoGrande']
-    },
-    {
-        id: '14',
-        description: 'Hello',
-        createdAt: new Date(2012, 12, 31, 23, 12),
-        author: 'MartaCapelli',
-        photoLink: 'pic/barokko3.jpg',
-        hashTags: ['#Photo4Photo'],
-        likes: ['MartaCapelli', 'HTP']
-    },
-    {
-        id: '15',
-        description: 'You read all of descriotions?',
-        createdAt: new Date(2012, 10, 19, 23, 12),
-        author: 'junior',
-        photoLink: 'pic/barokko4.jpg',
-        hashTags: ['#dinero', '#cash'],
-        likes: ['MartaCapelli', 'HTP']
-    },
-    {
-        id: '16',
-        description: 'Really?',
-        createdAt: new Date(2005, 10, 19, 23, 12),
-        author: 'RomPavel',
-        photoLink: 'pic/exadel.jpg',
-        hashTags: ['#Photo4Photo',],
-        likes: [ 'StefanoGrande', 'HTP']
-    },
-    {
-        id: '17',
-        description: 'my respect',
-        createdAt: new Date(2002, 10, 19, 23, 12),
-        author: 'exadel',
-        photoLink: 'pic/exadel1.jpg',
-        hashTags: ['#Photo4Photo', '#dinero'],
-        likes: [ 'StefanoGrande', 'HTP']
-    },
-    {
-        id: '18',
-        description: 'But it seems to me that this is not the right time management',
-        createdAt: new Date(2011, 11, 19, 23, 12),
-        author: 'RomPavel',
-        photoLink: 'pic/exadel2.jpg',
-        hashTags: ['#Photo4Photo', '#dinero', '#JSbetterThanVerstka'],
-        likes: ['exadel', 'StefanoGrande']
-    },
-    {
-        id: '19',
-        description: 'valid post',
-        createdAt: new Date(1999, 10, 10, 10, 10),
-        author: "RomPavel",
-        photoLink: 'pic/exadel.jpg',
-        hashTags: ['#Photo4Photo', '#dinero', '#ECMAbetterThanVerstka'],
-        likes: ['StefanoGrande']
 
-    },
-    {
-        id: '20',
-        description: 'valid post',
-        createdAt: new Date(2015, 11, 18, 23, 12),
-        author: 'BSU',
-        photoLink: 'pic/exadel1.jpg',
-        hashTags: ['#Photo4Photo', '#ECMAbetterThanVerstka'],
-        likes: ['exadel']
-    }
-]
+photoPosts.addPhotoPost(new Post('AnnaMaria', new Date(1800, 14, 18, 23, 12),'pic/barokko1.jpg',['AnnaMaria', 'MarioValentino'], 'Where my prince on a white horse?', ['#InCastle', '#WaitingForPrince']));
+photoPosts.addPhotoPost(new Post('AnnaMaria',new Date(1820, 11, 18, 23, 12),'pic/barokko2.jpg',['StefanoGrande'], 'How to get rid of rats in the house?', ['#InCastle', '#HateRats']));
+photoPosts.addPhotoPost(new Post('StefanoGrande',new Date(1810, 10, 16, 20, 12), 'pic/barokko.jpg',['AnnaMaria', 'MarioValentino',], 'War.... war never changes',['#InCastle', '#HateWar']));
+photoPosts.addPhotoPost(new Post('MarioValentino',new Date(1850, 10, 16, 20, 12), 'pic/barokko4.jpg',['AnnaMaria'], 'Again I lost the crop',['#NotInCastle', '#NeedJob', '#GodBlessKing']));
+photoPosts.addPhotoPost(new Post('AnnaMaria', new Date(1810, 10, 16, 20, 12),'pic/barokko3.jpg',['AnnaMaria'], 'War.... war never changes',['#InCastle', '#HateWar']));
+photoPosts.addPhotoPost(new Post('StefanoGrande', new Date(1910, 10, 16, 20, 12),'pic/exadel.jpg',['AnnaMaria'], 'War.... war never changes',['#InCastle', '#HateWar']));
+photoPosts.addPhotoPost(new Post('MarioValentino', new Date(1930, 10, 16, 20, 12), 'pic/exadel1.jpg',['AnnaMaria'], 'War.... war never changes',['#InCastle', '#HateWar']));
+photoPosts.addPhotoPost(new Post('StefanoGrande', new Date(1900, 10, 16, 20, 12), 'pic/exadel2.jpg',['AnnaMaria', 'StefanoGrande'], 'War.... war never changes',['#InCastle', '#HateWar']));
+photoPosts.addPhotoPost(new Post('AnnaMaria', new Date(1950, 10, 16, 20, 12), 'pic/exadel.jpg',['AnnaMaria', 'StefanoGrande'], 'War.... war never changes',['#InCastle', '#HateWar']));
+photoPosts.addPhotoPost(new Post('StefanoGrande', new Date(1990, 10, 16, 20, 12), 'pic/order.jpg',['AnnaMaria'], 'War.... war never changes',['#InCastle', '#HateWar']));
+photoPosts.addPhotoPost(new Post('AnnaMaria', new Date(2000, 10, 16, 20, 12), 'pic/exadel2.jpg',['AnnaMaria'], 'War.... war never changes',['#InCastle', '#HateWar']));
 
-let filterConfig = undefined;/* {
+
+const filterConfig = undefined;/* {
     fromDate: new Date(1800, 10, 16, 20, 12),
     toDate: new Date(2020, 10, 16, 20, 12),
     author: 'StefanoGrande',
     hashTags: ['#InCastle', '#HateWar'],
 };*/
 
+const Users = [
+    {
+        username: "StefanoGrande",
+        password: "111"
+    },
+    {
+        username: "AnnaMaria",
+        password: "222"
+    },
+    {
+        username: "1",
+        password: "1"
+    }
+]
 
-for (method in ServerModule) {
-    photoPosts.__proto__[method] = ServerModule[method];
-}
-//tests
-console.log("-getPhotoPosts-")
-console.log("skip and top = default    :", photoPosts.getPhotoPosts());
-console.log("skip = 6 and top = default:", photoPosts.getPhotoPosts(6));
-console.log("skip = 1 and top = 3      :", photoPosts.getPhotoPosts(1, 3));
-console.log("posts after filtering     :", photoPosts.getPhotoPosts(0, 10, filterConfig));
-console.log("with invalid argument     :", photoPosts.getPhotoPosts("argument"))
-
-
-console.log("\n-getPhotoPost-");
-console.log("post with id 2       :", photoPosts.getPhotoPost('2'));
-console.log("post with id 11      :", photoPosts.getPhotoPost('11'));
-console.log("with invalid argument:", photoPosts.getPhotoPost(100));
-
-
-console.log("\n-validatePhotoPost-");
-console.log("Full post            :", photoPosts.validatePhotoPost({
-    id: "4",
-    description: 'Hello',
-    createdAt: new Date(2012, 10, 19, 23, 12),
-    author: 'RomPavel',
-    photoLink: 'photogram1',
-    hashTags: ['#Photo4Photo', '#dinero'],
-    likes: ['exadel', 'epam', 'HTP']
-}));
-console.log("with invalid argument:", photoPosts.validatePhotoPost({
-    id: "4",
-    description: 'Hello',
-    createdAt: 4,
-    author: 'RomPavel',
-    photoLink: 'photogram1',
-    hashTags: ['#Photo4Photo', '#dinero'],
-    likes: ['exadel', 'epam', 'HTP']
-}));
-console.log("with empty properties:", photoPosts.validatePhotoPost({
-    id: "4",
-    description: 'Hello',
-    createdAt: new Date(2012, 10, 19, 23, 12),
-    author: 'RomPavel',
-    photoLink: 'photogram1',
-    hashTags: [],
-    likes: []
-}));
-
-
-console.log("\n-addPhotoPost-");
-console.log("all posts:", photoPosts);
-console.log("try to add invalid post:", photoPosts.addPhotoPost({
-    id: "4",
-    description: 'Hello',
-    createdAt: 4
-}));
-console.log("all posts:", photoPosts);
-console.log("try to add valid post  :", photoPosts.addPhotoPost({
-    id: "1",
-    description: 'Hello',
-    createdAt: new Date(2012, 10, 19, 23, 12),
-    author: 'RomPavel',
-    photoLink: 'photogram1',
-    hashTags: ['#Photo4Photo', '#dinero'],
-    likes: ['exadel', 'epam', 'HTP']
-}));
-console.log("all posts:", photoPosts);
-
-console.log("\n-editPhotoPost-");
-console.log("post with id=3 before editing:", photoPosts.getPhotoPost('3'));
-console.log("try to edit post with id=3   :", photoPosts.editPhotoPost('3', {
-    photoLink: 'new.link',
-    description: 'new description'
-}));
-console.log("post with id=3 after editing :", photoPosts.getPhotoPost('3'));
-console.log("with invalid argument        :", photoPosts.editPhotoPost(''));
-
-
-console.log("\n-removePhotoPost-");
-console.log("with invalid argument:", photoPosts.removePhotoPost(''));
-console.log("remove id=3 post     :", photoPosts.removePhotoPost('3'));
-console.log("try to get id=3 post :", photoPosts.getPhotoPost('3'));
 
 
 

@@ -1,28 +1,27 @@
-    
+    *{
+        font-family: 'Timmana', sans-serif; 
+        outline:none; 
+    }
+
     body, html{
         height: 100%;
     margin: 0px 0px 0px 0px;
     
     }
     .main{
-        min-height: 100% !important;
+        min-height: 100% ;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-    }
-
-  
-   
-
-    *{
-        font-family: 'Timmana', sans-serif; 
-        outline:none; 
     }
  
     .material-icons, .btn{
         cursor: pointer;
     }
 
+    i{
+        user-select: none;
+    }
     .btn{
         font-family: 'Timmana', sans-serif;
         font-size:20px;
@@ -43,15 +42,14 @@
         border-radius: 4px;
         background-color: white;
         display:flex; 
+        justify-content: space-between;
     }   
     .btn-new-post{
         background-color:#3d051bc0;
-        margin-left: 40px;
       
     }
     .btn-sign-out{
         background-color:#00a5d383;
-        margin-right: 40px;
 
     }
     .btn-sign-in{
@@ -67,11 +65,10 @@
         background: #3d051b17;
     }
 
- 
     .user-info{
         width:100px;
-        margin: 4px auto 4px auto;
-        font-size: 25px;
+        margin:6px auto 0px 10px;
+        font-size: 17px;
         color:rgba(0, 0, 0, 0.767);
         display: flex;
         flex-direction: column;
@@ -127,40 +124,44 @@
     .footer{
         background-color:  #3d051b09;
         flex: 0 0  auto;
-        height:120px;
+        height:100px;
+        width:100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
     .photogram-name{
-        margin:20px 0px 0px 50px;
+        height:70px;
+        margin:auto auto auto 5%;
         width: 30%;
-        font-size:60px;
+        font-size:50px;
         color: #004e63
     }
     .photogram-logo{
-        margin:auto;
+        margin: 4px 10px 4px auto;
         border: 0px;
         width:100px;
 
     }
    
     .update-string{
-        margin: 80px auto auto auto;
+        margin: 70px auto auto auto;
         align-self: auto;
         font-size: 15px;
         color: #003748c0
     }
     .contacts-info{
         display: flex;
-        width: 32%;
+        width: 30%;
         flex-direction: column;
-        margin-right: 30px;
+        margin:auto;
+        margin-right: 5%;
         color:rgba(0, 0, 0, 0.651);
     }
     .contacts-info *{
+        font-size: 15px;
         text-align: end;
-        margin: 10px 0px 0px 10px;
+        margin: 2px 0px 0px 0px;
     }
     .post{
         max-width: 384px;
@@ -221,7 +222,7 @@
         border-radius: 10px;
     }
     .post-info{
-       width: 100%;
+        width: 100%;
         margin-top:10px;
         display:flex;
         justify-content: space-between;
@@ -236,7 +237,7 @@
         border: 2px solid #3d051b49;
         word-wrap: break-word;
     }
-    .description{
+    .discription{
         margin-right:3px;
         width: 63%;
 
@@ -246,6 +247,102 @@
         width: 34%;
         color:#004e63;
     }
+
+
+
+
+
+
+    input{
+        padding-left:5px;
+    }
+    .logIN{
+        width:80%;
+        margin:auto;
+        display:flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .username, .password{
+        width:250px;
+        padding-top: 3px;
+        margin: 10px 0px 10px 0px;
+        border-radius: 10px;
+        color: rgb(0, 0, 0);
+    }
+    .username{
+        margin: 5px;
+    }
+    .password{
+        margin: 5px;
+    }
+    .welcomeText{
+        font-size:60px;
+        color:#6d4353;
+    }
+    .btn-log-in{
+        margin-top:5px;
+        background: #00a5d383;
+    }
+
+
+    form[name="logInForm"]{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .addPhotoForm{
+        display: flex;
+        flex-direction: column;
+        margin:auto;
+    }
+    .addPhoto{
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        padding: 10px 20px 20px 20px;
+        border-radius: 10px;
+        background-color: #3d051b17;
+        
+    }
+    textarea{
+        resize: none;
+        height: 100px;
+    }
+    .DragDropInput{
+        position: absolute;
+        padding: 0;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+    }
+    .DragAndDrop{
+        border-radius: 10px;
+        background: white;
+        border: 2px dashed #3d051b49;
+        position: relative;
+    }
+    .DragDropText{
+        width: 100%;
+        text-align: center;
+        top:50%;
+        position: absolute;
+        color:#004e63;
+    }
+    .btn-add-photo{
+        margin-top:20px;
+        background-color:#3d051bc0;
+    }
+
+    .background{
+        max-width: 380px;
+        width:100%;
+        border: none;
+    }
+
+
+
     @media screen and (max-width: 950px) { 
         .feed{
             margin-top:140px;
@@ -288,6 +385,11 @@
             margin-top:160px;
             width: 90%;
         } 
+
+        .addPhotoForm{
+            width: 80%;
+            margin-bottom: 10%;
+        }
         .delete-icon,.edit-icon{
             font-size: 22px;
         }
@@ -314,7 +416,10 @@
           .btn-new-post, .btn-sign-out{
               margin:auto;
           }
+        .welcomeText{
+            font-size:40px;
+        }
     }
-       
-  
-      
+
+
+

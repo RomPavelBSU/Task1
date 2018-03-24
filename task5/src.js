@@ -1,22 +1,20 @@
 
 //module
 const dom = (function () {
-
-    const user = "StefanoGrande";
-
-    document.getElementsByClassName("user-info")[0].childNodes[2].textContent = user || "WhoAreYou?";
-
-    if (!user) {
-        let button = document.createElement("button")
-        button.classList.add("btn");
-        button.classList.add("btn-sign-in");
-        button.innerText = "sign in";
-
-        document.querySelector(".btn-new-post").remove();
-        document.querySelector(".btn-sign-out").replaceWith(button);
-    }
-
+    user = null;
     return {
+        displayUserInfo(user) {
+            document.getElementsByClassName("user-info")[0].childNodes[2].textContent = user || "WhoAreYou?";
+            if (!user) {
+                let button = document.createElement("button")
+                button.classList.add("btn");
+                button.classList.add("btn-sign-in");
+                button.innerText = "sign in";
+
+                document.querySelector(".btn-new-post").remove();
+                document.querySelector(".btn-sign-out").replaceWith(button);
+            }
+        },
         displayPosts(posts) {
 
             let feed = document.getElementsByClassName("feed")[0];
@@ -58,7 +56,9 @@ const dom = (function () {
             }
 
         },
-
+        pressLike(button) {
+            button.innerHTML = button.innerHTML === "favorite" ? "favorite_border" : "favorite";
+        },
         createHTMLforPost(post) {
             let data = post.createdAt;
             return `
@@ -67,46 +67,201 @@ const dom = (function () {
                     ${data.getHours()}:${data.getMinutes()} / ${data.getDate()}.${data.getMonth() + 1}.${data.getFullYear()}
                 </div>
                 ${ user ?
-                    `<i class="like-icon material-icons">${post.likes.includes(user) ? `favorite` : `favorite_border`}</i>`
-                    : ``}
+                    `<i class="like-icon material-icons" onclick="pressLike(this.parentNode.parentNode.id);dom.pressLike(this)">${post.likes.includes(user) ? `favorite` : `favorite_border`}</i>`
+                    : 
+                    ``
+                }
 
                 <div  class="post-toolbar-user">
                 ${
                 post.author === user ?
-                    `
-                <i class="edit-icon material-icons">mode_edit</i>
-                <div class="post-username">
-                    ${post.author}
-                </div>
-                <i class="delete-icon material-icons">delete</i>
                 `
-                    :
-                    `
-                <div class="post-username">
-                    ${post.author}
-                </div>
+                    <i class="edit-icon material-icons">mode_edit</i>
+                    <div class="post-username">
+                        ${post.author}
+                    </div>
+                    <i class="delete-icon material-icons" onclick="removePhotoPost(this.parentNode.parentNode.parentNode.id)">delete</i>
+                `
+                :
+                `
+                    <div class="post-username">
+                       ${post.author}
+                    </div>
                 `
                 }
                 </div >
             </div >
             <img src=${post.photoLink} width="380" alt="photo">
             <div class="post-info">
-                <div class="description">
-                    ${post.description}
+                <div class="discription">
+                    ${post.discription}
                 </div>
                 <div class="hashtags">
                     ${post.hashTags.join("\n")}
                 </div>
             </div>
             `
+        },
+
+        displayFeed() {
+            let logIN = document.getElementsByClassName("logIN")[0];
+            let addPhotoForm = document.getElementsByClassName("addPhotoForm")[0];
+            if (logIN)
+                logIN.remove();
+            if (addPhotoForm)
+                addPhotoForm.remove();
+
+            let filters = document.createElement("div");
+            filters.classList.add("filters-container");
+            filters.innerHTML = `
+                <div class="filt-cont-text">
+                    Filters
+                </div>
+    
+                <input type="text" class="filter" placeholder="username">
+    
+                <input type="text" class=filter placeholder="#hashtags">
+    
+                <div class="filters-by-date">
+                    from:
+                    <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy"> to:
+                    <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy">
+                 </div>
+            `;
+            let body = document.getElementsByTagName("body")[0];
+            body.insertBefore(filters, body.childNodes[1]);
+            let btn = document.createElement("button");
+            btn.classList.add("btn");
+            btn.classList.add("btn-new-post");
+            btn.innerHTML = `
+                new post
+            `;
+            btn.addEventListener("click", dom.displayAddPage);
+            let header = document.getElementsByClassName("header")[0];
+            header.insertBefore(btn, header.childNodes[3]);
+
+            btn = document.getElementsByClassName("btn-sign-out")[0];
+            if (!btn) {
+                btn = document.createElement("button");
+                btn.classList.add("btn");
+                btn.classList.add("btn-sign-out");
+                btn.innerHTML = `
+                sign out
+            `
+                btn.addEventListener("click", dom.displayLogIn);
+                header.insertBefore(btn, header.childNodes[4]);
+            }
+
+            btn = document.createElement("button");
+            btn.classList.add("btn");
+            btn.classList.add("btn-load-more");
+            btn.innerHTML = `
+                load more
+            `
+            btn.addEventListener("click", pressLoadMoreButton);
+
+            let main = document.getElementsByClassName("main")[0];
+            main.insertBefore(btn, main.childNodes[1]);
+            let feed = document.createElement("div");
+            feed.classList.add("feed");
+            main.insertBefore(feed, main.childNodes[1]);
+        },
+        displayLogIn() {
+            let feed = document.getElementsByClassName("feed")[0];
+            let filters = document.getElementsByClassName("filters-container")[0];
+            let btns = document.getElementsByClassName("btn");
+            let addPhotoForm = document.getElementsByClassName("addPhotoForm")[0];
+
+            if (addPhotoForm)
+                addPhotoForm.remove();
+            if (feed)
+                feed.remove();
+            if (filters)
+                filters.remove();
+            while (btns.length > 0) {
+                btns[0].remove();
+            }
+            let main = document.getElementsByClassName("main")[0];
+            let logIN = document.createElement("div");
+            logIN.classList.add("logIN");
+            logIN.innerHTML =
+                `
+            <div class="welcomeText">Welcome to Photogram!</div>
+            <form name="logInForm"" onsubmit="return false;">
+                <input placeholder="1 || AnnaMaria" class="username"/>
+                <input type="password" placeholder="1 || 222" class="password"/>
+                <button type="button" class="btn btn-log-in" onclick="checkUser()">log in</button>
+            </form>
+            
+            `;
+            main.insertBefore(logIN, main.childNodes[1]);
+        },
+
+        displayAddPage() {
+            let main = document.getElementsByClassName("main")[0];
+            let feed = document.getElementsByClassName("feed")[0];
+            let filters = document.getElementsByClassName("filters-container")[0];
+            let logIN = document.getElementsByClassName("logIN")[0];
+            let btn = document.getElementsByClassName("btn-load-more")[0];
+            let newPost = document.getElementsByClassName("btn-new-post")[0];
+
+            if (logIN)
+                logIN.remove();
+            if (feed)
+                feed.remove();
+            if (filters)
+                filters.remove();
+            if (btn)
+                btn.remove();
+            if (newPost)
+                newPost.remove();
+
+            let addPhoto = document.createElement("div");
+            addPhoto.classList.add("addPhoto");
+            addPhoto.innerHTML = `
+            <div class="post-toolbar">
+                <div class="post-username">
+                    ${user}
+                </div>
+            </div>
+            <div class="DragAndDrop">
+                <div class ="DragDropText">Drag here or <i>click</i></div>
+                <input class="DragDropInput" type="file" accept="image/*" onchange="dom.displayPhoto(this)" > 
+                <img class="background">
+            </div>
+            <div class="post-info">
+                <textarea placeholder="discription" class="discription"></textarea>
+
+                <textarea placeholder="#hashtags" class="hashtags"></textarea>
+            </div>
+            `
+            btn = document.createElement("button");
+            btn.classList.add("btn");
+            btn.classList.add("btn-add-photo");
+            btn.innerHTML = `add photo`;
+            btn.addEventListener("click", pressAddPost);
+
+            let form = document.createElement("form");
+            form.classList.add("addPhotoForm");
+            form.appendChild(addPhoto);
+            form.appendChild(btn);
+
+            main.insertBefore(form, main.childNodes[1]);
+        },
+        displayPhoto(elem) {
+            const background = document.getElementsByClassName("background")[0];
+            background.src = `pic/${elem.files[0].name}`;
+            
+            let text = document.querySelector(".DragDropText");
+            text.style.color = "#00a5d383";
         }
     }
 })();
 
-
+dom.displayLogIn();
 //Global Functions
-function displayPosts() {
 
+function displayPosts() {
     let feed = document.getElementsByClassName("feed")[0];
     while (feed.lastChild)
         feed.lastChild.remove();
@@ -117,9 +272,7 @@ function displayPosts() {
 function addPhotoPost(post) {
     if (photoPosts.addPhotoPost(post)) {
         let feed = document.getElementsByClassName("feed")[0];
-
-        while (feed.lastChild)
-            feed.lastChild.remove();
+        feed.innerHTML = ``;
 
         dom.displayPosts(photoPosts.getPhotoPosts());
 
@@ -165,107 +318,65 @@ function pressLoadMoreButton() {
         document.getElementsByClassName("btn-load-more")[0].style.display = "none";
 }
 
+function pressLike(id) {
+    const post = photoPosts.getPhotoPost(id);
 
-displayPosts();
-// addPhotoPost({
-//     id: '1',
-//     description: 'Where my prince on a white horse?',
-//     createdAt: new Date(1800, 14, 18, 23, 12),
-//     author: 'AnnaMaria',
-//     photoLink: 'pic/barokko1.jpg',
-//     hashTags: ['#InCastle', '#WaitingForPrince'],
-//     likes: ['AnnaMaria', 'MarioValentino',]
-// })
-// addPhotoPost({
-//     id: '2',
-//     description: 'How to get rid of rats in the house?',
-//     createdAt: new Date(1820, 11, 18, 23, 12),
-//     author: 'AnnaMaria',
-//     photoLink: 'pic/barokko2.jpg',
-//     hashTags: ['#InCastle', '#HateRats'],
-//     likes: ['StefanoGrande']
-// })
-// addPhotoPost({
-//     id: '3',
-//     description: 'War.... war never changes',
-//     createdAt: new Date(1810, 10, 16, 20, 12),
-//     author: 'StefanoGrande',
-//     photoLink: 'pic/barokko.jpg',
-//     hashTags: ['#InCastle', '#HateWar'],
-//     likes: ['AnnaMaria', 'MarioValentino',]
-// })
-// addPhotoPost({
-//     id: '4',
-//     description: 'Again I lost the crop',
-//     createdAt: new Date(1850, 10, 16, 20, 12),
-//     author: 'MarioValentino',
-//     photoLink: 'pic/barokko4.jpg',
-//     hashTags: ['#NotInCastle', '#NeedJob', '#GodBlessKing'],
-//     likes: ['AnnaMaria']
-// })
-// addPhotoPost({
-//     id: '5',
-//     description: 'War.... war never changes',
-//     createdAt: new Date(1810, 10, 16, 20, 12),
-//     author: 'AnnaMaria',
-//     photoLink: 'pic/barokko3.jpg',
-//     hashTags: ['#InCastle', '#HateWar'],
-//     likes: ['AnnaMaria']
-// })
-// addPhotoPost({
-//     id: '6',
-//     description: 'War.... war never changes',
-//     createdAt: new Date(1910, 10, 16, 20, 12),
-//     author: 'StefanoGrande',
-//     photoLink: 'pic/exadel.jpg',
-//     hashTags: ['#InCastle', '#HateWar'],
-//     likes: ['AnnaMaria']
-// })
-// addPhotoPost({
-//     id: '7',
-//     description: 'War.... war never changes',
-//     createdAt: new Date(1930, 10, 16, 20, 12),
-//     author: 'MarioValentino',
-//     photoLink: 'pic/exadel1.jpg',
-//     hashTags: ['#InCastle', '#HateWar'],
-//     likes: ['AnnaMaria']
-// })
-// addPhotoPost({
-//     id: '8',
-//     description: 'War.... war never changes',
-//     createdAt: new Date(1900, 10, 16, 20, 12),
-//     author: 'StefanoGrande',
-//     photoLink: 'pic/exadel2.jpg',
-//     hashTags: ['#InCastle', '#HateWar'],
-//     likes: ['AnnaMaria', 'StefanoGrande']
-// })
-// addPhotoPost({
-//     id: '9',
-//     description: 'War.... war never changes',
-//     createdAt: new Date(1950, 10, 16, 20, 12),
-//     author: 'AnnaMaria',
-//     photoLink: 'pic/exadel.jpg',
-//     hashTags: ['#InCastle', '#HateWar'],
-//     likes: ['AnnaMaria', 'StefanoGrande']
-// })
-// addPhotoPost({
-//     id: '10',
-//     description: 'War.... war never changes',
-//     createdAt: new Date(1990, 10, 16, 20, 12),
-//     author: 'StefanoGrande',
-//     photoLink: 'pic/order.jpg',
-//     hashTags: ['#InCastle', '#HateWar'],
-//     likes: ['AnnaMaria']
-// })
-// addPhotoPost({
-//     id: '11',
-//     description: 'War.... war never changes',
-//     createdAt: new Date(2000, 10, 16, 20, 12),
-//     author: 'AnnaMaria',
-//     photoLink: 'pic/exadel2.jpg',
-//     hashTags: ['#InCastle', '#HateWar'],
-//     likes: ['AnnaMaria']
-// })
+    const ind = post.likes.findIndex((el) => el === user);
+    if (~ind) {
+        post.likes.splice(ind, 1);
+    }
+    else {
+        post.likes.push(user);
+    }
+}
+function checkUser() {
+    const form = document.forms.logInForm;
+    const name = form[0].value;
+    const password = form[1].value;
+    let error = document.getElementsByClassName("error")[0];
+    for (let i = 0; i < Users.length; i++) {
+        if (Users[i].username === name) {
+            if (Users[i].password === password) {
+                if (error) {
+                    error.remove();
+                }
+                user = name;
+                dom.displayFeed();
+                displayPosts();
+                dom.displayUserInfo(name);
+                return true;
+            }
+            else {
+                if (!error) {
+                    let error = document.createElement("div");
+                    error.classList.add("error");
+                    error.innerHTML = `wrong password`;
+                    form.insertBefore(error, form[2]);
+                }
+                else {
+                    error.innerHTML = `wrong password`;
+                }
+                return false;
+            }
+        }
+    }
+    if (!error) {
+        let error = document.createElement("div");
+        error.classList.add("error");
+        error.innerHTML = `wrong all`;
+        form.insertBefore(error, form[2]);
+    }
+    else {
+        error.innerHTML = `wrong all`;
+    }
+    return false;
+}
 
-// editPhotoPost("11", { description: "new description" });
-// displayPosts();
+function pressAddPost() {
+    let hashTags = document.querySelector(`textarea[class="hashtags"]`).value.split(" ");
+    let discription = document.querySelector(`textarea[class="discription"]`).value;
+    let photoLink = "pic/" + document.getElementsByClassName("DragDropInput")[0].files[0].name;
+
+    dom.displayFeed();
+    addPhotoPost(new Post(user, new Date(), photoLink, [], discription, hashTags));
+}
