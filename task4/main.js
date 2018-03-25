@@ -23,21 +23,21 @@ const ServerModule = (function () {
             let posts = this;
             if (typeof filterConfig === "object") {
                 posts = posts.filter((post) => {
-                    if (filterConfig.hasOwnProperty("author")) {
-                        if (filterConfig.author !== post.author)
+                    if (filterConfig.author!=="") {
+                        if (!~post.author.indexOf(filterConfig.author))
                             return false;
                     }
-                    if (filterConfig.hasOwnProperty("hashTags")) {
+                    if (filterConfig.hashTags.length!==0) {
                         if (!filterConfig.hashTags.every((tag) => {
                             return post.hashTags.includes(tag);
                         }))
                             return false;
                     }
-                    if (filterConfig.hasOwnProperty("fromDate")) {
+                    if (filterConfig.fromDate!=="") {
                         if (post.createdAt - filterConfig.fromDate < 0)
                             return false;
                     }
-                    if (filterConfig.hasOwnProperty("toDate")) {
+                    if (filterConfig.toDate!=="") {
                         if (filterConfig.toDate - post.createdAt < 0)
                             return false;
                     }
@@ -68,7 +68,7 @@ const ServerModule = (function () {
 
             if (this.some((el) => el.id === post.id))
                 return false;
-            if (typeof post.discription !== "string" || post.discription === "")
+            if (typeof post.discription !== "string")
                 return false;
             if (!(post.createdAt instanceof Date))
                 return false;
@@ -189,12 +189,12 @@ photoPosts.addPhotoPost(new Post('StefanoGrande', new Date(1990, 10, 16, 20, 12)
 photoPosts.addPhotoPost(new Post('AnnaMaria', new Date(2000, 10, 16, 20, 12), 'pic/exadel2.jpg',['AnnaMaria'], 'War.... war never changes',['#InCastle', '#HateWar']));
 
 
-const filterConfig = undefined;/* {
-    fromDate: new Date(1800, 10, 16, 20, 12),
-    toDate: new Date(2020, 10, 16, 20, 12),
-    author: 'StefanoGrande',
-    hashTags: ['#InCastle', '#HateWar'],
-};*/
+const filterConfig ={
+    fromDate:"",
+    toDate:"",
+    author:"",
+    hashTags:[]
+};
 
 const Users = [
     {

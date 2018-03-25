@@ -68,22 +68,22 @@ const dom = (function () {
                 </div>
                 ${ user ?
                     `<i class="like-icon material-icons" onclick="pressLike(this.parentNode.parentNode.id);dom.pressLike(this)">${post.likes.includes(user) ? `favorite` : `favorite_border`}</i>`
-                    : 
+                    :
                     ``
                 }
 
                 <div  class="post-toolbar-user">
                 ${
                 post.author === user ?
-                `
+                    `
                     <i class="edit-icon material-icons">mode_edit</i>
                     <div class="post-username">
                         ${post.author}
                     </div>
                     <i class="delete-icon material-icons" onclick="removePhotoPost(this.parentNode.parentNode.parentNode.id)">delete</i>
                 `
-                :
-                `
+                    :
+                    `
                     <div class="post-username">
                        ${post.author}
                     </div>
@@ -118,14 +118,14 @@ const dom = (function () {
                     Filters
                 </div>
     
-                <input type="text" class="filter" placeholder="username">
+                <input type="text" class="filter" oninput="setFilterAuthor(this)" placeholder="username">
     
-                <input type="text" class=filter placeholder="#hashtags">
+                <input type="text" class="filter" oninput="setFilterHashtags(this)" placeholder="#hashtags">
     
                 <div class="filters-by-date">
                     from:
-                    <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy"> to:
-                    <input type="text" class="filter filt-by-date" placeholder="dd.mm.yyyy">
+                    <input type="text" class="filter filt-by-date" oninput="setFilterFromDate(this)" placeholder="dd.mm.yyyy"> to:
+                    <input type="text" class="filter filt-by-date" oninput="setFilterToDate(this)" placeholder="dd.mm.yyyy">
                  </div>
             `;
             let body = document.getElementsByTagName("body")[0];
@@ -249,10 +249,13 @@ const dom = (function () {
             main.insertBefore(form, main.childNodes[1]);
         },
         displayPhoto(elem) {
+
+            document.getElementsByClassName("DragAndDrop")[0].style.height = "auto";
             const background = document.getElementsByClassName("background")[0];
             background.src = `pic/${elem.files[0].name}`;
-            
-            let text = document.querySelector(".DragDropText");
+
+            document.getElementsByClassName("main")[0].style.margin = "70px 0 0 0";
+            const text = document.querySelector(".DragDropText");
             text.style.color = "#00a5d383";
         }
     }
@@ -263,10 +266,10 @@ dom.displayLogIn();
 
 function displayPosts() {
     let feed = document.getElementsByClassName("feed")[0];
-    while (feed.lastChild)
-        feed.lastChild.remove();
+    feed.innerHTML = ``;
 
     dom.displayPosts(photoPosts.getPhotoPosts(undefined, undefined, filterConfig));
+    document.getElementsByClassName("btn-load-more")[0].style.display = "block";
 }
 
 function addPhotoPost(post) {
@@ -374,9 +377,31 @@ function checkUser() {
 
 function pressAddPost() {
     let hashTags = document.querySelector(`textarea[class="hashtags"]`).value.split(" ");
-    let discription = document.querySelector(`textarea[class="discription"]`).value;
+    let discription = document.querySelector(`textarea[class="discription"]`).value || "";
     let photoLink = "pic/" + document.getElementsByClassName("DragDropInput")[0].files[0].name;
-
+    document.getElementsByClassName("main")[0].style.margin = "0";
     dom.displayFeed();
     addPhotoPost(new Post(user, new Date(), photoLink, [], discription, hashTags));
+}
+
+function setFilterFromDate(el) {
+    filterConfig.fromDate = new Date(el.value);
+    displayPosts();
+}
+function setFilterToDate(el) {
+    filterConfig.toDate = new Date(el.value);
+    displayPosts();
+}
+function setFilterAuthor(el) {
+    filterConfig.author = el.value;
+    displayPosts();
+}
+function setFilterHashtags(el) {
+    if (el.value === "") {
+        filterConfig.hashTags = []
+    }
+    else {
+        filterConfig.hashTags = el.value.split(" ");
+    }
+    displayPosts();
 }
