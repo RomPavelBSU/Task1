@@ -368,6 +368,7 @@ function pressLike(id) {
     else {
         post.likes.push(localStorage.user);
     }
+    localStorage.photoPosts = JSON.stringify(posts);
 }
 function checkUser() {
     const form = document.forms.logInForm;
