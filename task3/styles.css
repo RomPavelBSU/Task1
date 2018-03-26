@@ -17,9 +17,6 @@
  
     .material-icons, .btn{
         cursor: pointer;
-    }
-
-    i{
         user-select: none;
     }
     .btn{
@@ -90,6 +87,7 @@
         font-size: 40px;
         display: flex;
         flex-direction: column;
+        z-index:100;
         
     }
     ::-webkit-input-placeholder {
@@ -134,7 +132,7 @@
     }
     .photogram-name{
         height:70px;
-        margin:auto auto auto 5%;
+        margin:auto auto auto 10px;
         width: 30%;
         font-size:50px;
         color: #004e63
@@ -157,7 +155,7 @@
         width: 30%;
         flex-direction: column;
         margin:auto;
-        margin-right: 5%;
+        margin-right: 10px;
         color:rgba(0, 0, 0, 0.651);
     }
     .contacts-info *{
@@ -239,7 +237,7 @@
         border: 2px solid #3d051b49;
         word-wrap: break-word;
     }
-    .discription{
+    .description{
         margin-right:3px;
         width: 63%;
 

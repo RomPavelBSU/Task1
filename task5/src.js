@@ -1,7 +1,6 @@
 
 //module
 const dom = (function () {
-    user = null;
     return {
         displayUserInfo(user) {
             document.getElementsByClassName("user-info")[0].childNodes[2].textContent = user || "WhoAreYou?";
@@ -60,23 +59,23 @@ const dom = (function () {
             button.innerHTML = button.innerHTML === "favorite" ? "favorite_border" : "favorite";
         },
         createHTMLforPost(post) {
-            let data = post.createdAt;
+            let data = new Date(post.createdAt);
             return `
             <div class="post-toolbar">
                 <div class="post-upload-data">
                     ${data.getHours()}:${data.getMinutes()} / ${data.getDate()}.${data.getMonth() + 1}.${data.getFullYear()}
                 </div>
-                ${ user ?
-                    `<i class="like-icon material-icons" onclick="pressLike(this.parentNode.parentNode.id);dom.pressLike(this)">${post.likes.includes(user) ? `favorite` : `favorite_border`}</i>`
+                ${ localStorage.user ?
+                    `<i class="like-icon material-icons" onclick="pressLike(this.parentNode.parentNode.id);dom.pressLike(this)">${post.likes.includes(localStorage.user) ? `favorite` : `favorite_border`}</i>`
                     :
                     ``
                 }
 
                 <div  class="post-toolbar-user">
                 ${
-                post.author === user ?
+                post.author === localStorage.user ?
                     `
-                    <i class="edit-icon material-icons">mode_edit</i>
+                    <i class="edit-icon material-icons" onclick="dom.displayEditForm(this.parentNode.parentNode.parentNode)">mode_edit</i>
                     <div class="post-username">
                         ${post.author}
                     </div>
@@ -93,8 +92,8 @@ const dom = (function () {
             </div >
             <img src=${post.photoLink} width="380" alt="photo">
             <div class="post-info">
-                <div class="discription">
-                    ${post.discription}
+                <div class="description">
+                    ${post.description}
                 </div>
                 <div class="hashtags">
                     ${post.hashTags.join("\n")}
@@ -104,6 +103,7 @@ const dom = (function () {
         },
 
         displayFeed() {
+            localStorage.state = "2";
             let logIN = document.getElementsByClassName("logIN")[0];
             let addPhotoForm = document.getElementsByClassName("addPhotoForm")[0];
             if (logIN)
@@ -167,6 +167,7 @@ const dom = (function () {
             main.insertBefore(feed, main.childNodes[1]);
         },
         displayLogIn() {
+            localStorage.state = "1";
             let feed = document.getElementsByClassName("feed")[0];
             let filters = document.getElementsByClassName("filters-container")[0];
             let btns = document.getElementsByClassName("btn");
@@ -198,6 +199,7 @@ const dom = (function () {
         },
 
         displayAddPage() {
+            localStorage.state = "3";
             let main = document.getElementsByClassName("main")[0];
             let feed = document.getElementsByClassName("feed")[0];
             let filters = document.getElementsByClassName("filters-container")[0];
@@ -221,7 +223,7 @@ const dom = (function () {
             addPhoto.innerHTML = `
             <div class="post-toolbar">
                 <div class="post-username">
-                    ${user}
+                    ${localStorage.user}
                 </div>
             </div>
             <div class="DragAndDrop">
@@ -230,7 +232,7 @@ const dom = (function () {
                 <img class="background">
             </div>
             <div class="post-info">
-                <textarea placeholder="discription" class="discription"></textarea>
+                <textarea placeholder="description" class="description"></textarea>
 
                 <textarea placeholder="#hashtags" class="hashtags"></textarea>
             </div>
@@ -247,54 +249,85 @@ const dom = (function () {
             form.appendChild(btn);
 
             main.insertBefore(form, main.childNodes[1]);
+            document.getElementsByClassName("main")[0].style.margin = "70px 0 0 0";
         },
         displayPhoto(elem) {
 
             document.getElementsByClassName("DragAndDrop")[0].style.height = "auto";
             const background = document.getElementsByClassName("background")[0];
-            background.src = `pic/${elem.files[0].name}`;
+            background.src = `pic/${elem.files[0].name}`
 
-            document.getElementsByClassName("main")[0].style.margin = "70px 0 0 0";
             const text = document.querySelector(".DragDropText");
             text.style.color = "#00a5d383";
+        },
+        displayEditForm(post) {
+            const postToEdit = JSON.parse(localStorage.photoPosts).getPhotoPost(post.id);
+            const data = new Date(postToEdit.createdAt);
+            post.innerHTML = ``;
+            post.classList.add("addPhotoForm");
+            post.style.height = "auto";
+            post.innerHTML = `
+            <div class="post-toolbar">
+                <div class="post-upload-data">
+                    ${data.getHours()}:${data.getMinutes()} / ${data.getDate()}.${data.getMonth() + 1}.${data.getFullYear()}
+                </div>
+                <i class="like-icon material-icons" onclick="saveEditPost(this.parentNode.parentNode)">save</i>
+                <div class="post-username">
+                    ${localStorage.user}
+                </div>
+            </div>
+            <div class="DragAndDrop">
+                <div class ="DragDropText">Drag here or <i>click</i></div>
+                <input class="DragDropInput" type="file" accept="image/*" onchange="dom.displayPhoto(this)" > 
+                <img class="background" src="${postToEdit.photoLink}">
+            </div>
+            <div class="post-info">
+                <textarea placeholder="description" defaultValue="${postToEdit.description}" class="description"></textarea>
+        
+                <textarea placeholder="#hashtags" defaultValue="${postToEdit.hashTags}" class="hashtags"></textarea>
+            </div>
+            `;
+            post.getElementsByClassName("DragAndDrop")[0].style.height = "auto";
+            post.style.margin = "0 0 50px 0"
         }
     }
 })();
 
-dom.displayLogIn();
-//Global Functions
-
 function displayPosts() {
+    const posts = JSON.parse(localStorage.photoPosts);
     let feed = document.getElementsByClassName("feed")[0];
     feed.innerHTML = ``;
 
-    dom.displayPosts(photoPosts.getPhotoPosts(undefined, undefined, filterConfig));
+    dom.displayPosts(posts.getPhotoPosts(undefined, undefined, filterConfig));
     document.getElementsByClassName("btn-load-more")[0].style.display = "block";
 }
 
 function addPhotoPost(post) {
-    if (photoPosts.addPhotoPost(post)) {
-        let feed = document.getElementsByClassName("feed")[0];
-        feed.innerHTML = ``;
-
-        dom.displayPosts(photoPosts.getPhotoPosts());
-
-        let actuall_amount = document.getElementsByClassName("post").length;
-        if (actuall_amount < photoPosts.length)
-            document.getElementsByClassName("btn-load-more")[0].style.display = "block";
-
-        return true;
+    const posts = JSON.parse(localStorage.photoPosts);
+    if (posts.addPhotoPost(post)) {
+        localStorage.photoPosts = JSON.stringify(posts);
     }
+    let feed = document.getElementsByClassName("feed")[0];
+    feed.innerHTML = ``;
+
+    localStorage.state="2";
+    dom.displayPosts(posts.getPhotoPosts());
+
+    let actuall_amount = document.getElementsByClassName("post").length;
+    if (actuall_amount < posts.length)
+        document.getElementsByClassName("btn-load-more")[0].style.display = "block";
     else return false;
 }
 function removePhotoPost(id) {
-    if (photoPosts.removePhotoPost(id)) {
+    const posts = JSON.parse(localStorage.photoPosts);
+    if (posts.removePhotoPost(id)) {
+        localStorage.photoPosts = JSON.stringify(posts);
         if (dom.removePhotoPost(id)) {
 
             let actuall_amount = document.getElementsByClassName("post").length;
-            if (actuall_amount < photoPosts.getPhotoPosts(0, photoPosts.length, filterConfig).length)
-                dom.loadOneMorePost(photoPosts.getPhotoPosts(actuall_amount, 1, filterConfig)[0]);
-            if (photoPosts.length <= actuall_amount + 1)
+            if (actuall_amount < posts.getPhotoPosts(0, posts.length, filterConfig).length)
+                dom.loadOneMorePost(posts.getPhotoPosts(actuall_amount, 1, filterConfig)[0]);
+            if (posts.length <= actuall_amount + 1)
                 document.getElementsByClassName("btn-load-more")[0].style.display = "none";
         }
         return true;
@@ -303,33 +336,37 @@ function removePhotoPost(id) {
 
 }
 function editPhotoPost(id, newPost) {
-    if (photoPosts.editPhotoPost(id, newPost)) {
-        dom.editPhotoPost(id, photoPosts.getPhotoPost(id));
+    const posts = JSON.parse(localStorage.photoPosts);
+    if (posts.editPhotoPost(id, newPost)) {
+        localStorage.photoPosts = JSON.stringify(posts);
+        dom.editPhotoPost(id, posts.getPhotoPost(id));
         return true;
     }
     else
         return false;
 }
 function pressLoadMoreButton() {
+    const posts = JSON.parse(localStorage.photoPosts);
     let actuall_amount = document.getElementsByClassName("post").length;
-    if (actuall_amount < photoPosts.getPhotoPosts(0, photoPosts.length, filterConfig).length) {
-        if (photoPosts.getPhotoPosts(0, photoPosts.length, filterConfig).length - actuall_amount <= 10)
+    if (actuall_amount < posts.getPhotoPosts(0, posts.length, filterConfig).length) {
+        if (posts.getPhotoPosts(0, photoPosts.length, filterConfig).length - actuall_amount <= 10)
             document.getElementsByClassName("btn-load-more")[0].style.display = "none";
-        dom.displayPosts(photoPosts.getPhotoPosts(actuall_amount, undefined, filterConfig));
+        dom.displayPosts(posts.getPhotoPosts(actuall_amount, undefined, filterConfig));
     }
     else
         document.getElementsByClassName("btn-load-more")[0].style.display = "none";
 }
 
 function pressLike(id) {
-    const post = photoPosts.getPhotoPost(id);
+    const posts = JSON.parse(localStorage.photoPosts);
+    const post = posts.getPhotoPost(id);
 
-    const ind = post.likes.findIndex((el) => el === user);
+    const ind = post.likes.findIndex((el) => el === localStorage.user);
     if (~ind) {
         post.likes.splice(ind, 1);
     }
     else {
-        post.likes.push(user);
+        post.likes.push(localStorage.user);
     }
 }
 function checkUser() {
@@ -337,16 +374,17 @@ function checkUser() {
     const name = form[0].value;
     const password = form[1].value;
     let error = document.getElementsByClassName("error")[0];
-    for (let i = 0; i < Users.length; i++) {
-        if (Users[i].username === name) {
-            if (Users[i].password === password) {
+    const users = JSON.parse(localStorage.users);
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].username === name) {
+            if (users[i].password === password) {
                 if (error) {
                     error.remove();
                 }
-                user = name;
+                localStorage.user = name;
                 dom.displayFeed();
                 displayPosts();
-                dom.displayUserInfo(name);
+                dom.displayUserInfo(localStorage.user);
                 return true;
             }
             else {
@@ -377,19 +415,37 @@ function checkUser() {
 
 function pressAddPost() {
     let hashTags = document.querySelector(`textarea[class="hashtags"]`).value.split(" ");
-    let discription = document.querySelector(`textarea[class="discription"]`).value || "";
+    let description = document.querySelector(`textarea[class="description"]`).value || "";
     let photoLink = "pic/" + document.getElementsByClassName("DragDropInput")[0].files[0].name;
     document.getElementsByClassName("main")[0].style.margin = "0";
     dom.displayFeed();
-    addPhotoPost(new Post(user, new Date(), photoLink, [], discription, hashTags));
+    let data = new Date();
+
+    addPhotoPost(new Post(localStorage.user, data , photoLink, [], description, hashTags));
+}
+function saveEditPost(post) {
+    const hashTags = post.querySelector(`textarea[class="hashtags"]`).value.split(" ");
+    const description = post.querySelector(`textarea[class="description"]`).value || "";
+    const input = post.getElementsByClassName("DragDropInput")[0];
+    let photoLink;
+    if (input.files[0]) {
+        photoLink = "pic/" + input.files[0].name;
+    }
+    else {
+        photoLink = post.getElementsByClassName("background")[0].src;
+    }
+
+    editPhotoPost(post.id, { hashTags, description, photoLink });
 }
 
 function setFilterFromDate(el) {
-    filterConfig.fromDate = new Date(el.value);
+    const data = el.value.split(".");
+    filterConfig.fromDate = new Date(data[2], data[1] - 1, data[0]), 0, 0;
     displayPosts();
 }
 function setFilterToDate(el) {
-    filterConfig.toDate = new Date(el.value);
+    const data = el.value.split(".");
+    filterConfig.toDate = new Date(data[2], data[1] - 1, data[0], 24, 0);
     displayPosts();
 }
 function setFilterAuthor(el) {
@@ -405,3 +461,25 @@ function setFilterHashtags(el) {
     }
     displayPosts();
 }
+
+
+function display() {
+    switch (localStorage.state) {
+        case "1": {
+            dom.displayLogIn();
+            break;
+        }
+        case "2": {
+            dom.displayFeed();
+            displayPosts();
+            dom.displayUserInfo(localStorage.user);
+            break;
+        }
+        case "3": {
+            dom.displayAddPage();
+            break;
+        }
+    }
+}
+
+display();

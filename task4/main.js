@@ -1,11 +1,11 @@
 let _id = 0;
 class Post {
-    constructor(author, createdAt, photoLink, likes, discription, hashTags) {
+    constructor(author, createdAt, photoLink, likes, description, hashTags) {
         this.id = String(_id++);
         this.createdAt = createdAt;
         this.photoLink = photoLink;
         this.author = author;
-        this.discription = discription;
+        this.description = description;
         this.hashTags = hashTags;
         this.likes = likes;
     }
@@ -34,11 +34,11 @@ const ServerModule = (function () {
                             return false;
                     }
                     if (filterConfig.fromDate!=="") {
-                        if (post.createdAt - filterConfig.fromDate < 0)
+                        if (new Date(post.createdAt) - filterConfig.fromDate <= 0)
                             return false;
                     }
                     if (filterConfig.toDate!=="") {
-                        if (filterConfig.toDate - post.createdAt < 0)
+                        if (filterConfig.toDate - new Date(post.createdAt) <= 0)
                             return false;
                     }
 
@@ -68,7 +68,7 @@ const ServerModule = (function () {
 
             if (this.some((el) => el.id === post.id))
                 return false;
-            if (typeof post.discription !== "string")
+            if (typeof post.description !== "string")
                 return false;
             if (!(post.createdAt instanceof Date))
                 return false;
@@ -89,8 +89,8 @@ const ServerModule = (function () {
                 return false;
             }
 
-            if (editPost.hasOwnProperty("discription")) {
-                if (typeof editPost.description !== "string" || editPost.description === "")
+            if (editPost.hasOwnProperty("description")) {
+                if (typeof editPost.description !== "string")
                     return false;
             }
             if (editPost.hasOwnProperty("photoLink")) {
@@ -115,7 +115,7 @@ const ServerModule = (function () {
 
             this.unshift(post);
             this.sort((post1, post2) => {
-                return post2.createdAt - post1.createdAt;
+                return new Date(post2.createdAt) - new Date(post1.createdAt);
             });
             return true;
         },
@@ -132,8 +132,8 @@ const ServerModule = (function () {
                     return false;
                 }
 
-                if (editPost.hasOwnProperty("discription")) {
-                    post.discription = editPost.discription;
+                if (editPost.hasOwnProperty("description")) {
+                    post.description = editPost.description;
                 }
                 if (editPost.hasOwnProperty("photoLink")) {
                     post.photoLink = editPost.photoLink;
@@ -177,10 +177,10 @@ for (method in ServerModule) {
 
 
 photoPosts.addPhotoPost(new Post('AnnaMaria', new Date(1800, 14, 18, 23, 12),'pic/barokko1.jpg',['AnnaMaria', 'MarioValentino'], 'Where my prince on a white horse?', ['#InCastle', '#WaitingForPrince']));
-photoPosts.addPhotoPost(new Post('AnnaMaria',new Date(1820, 11, 18, 23, 12),'pic/barokko2.jpg',['StefanoGrande'], 'How to get rid of rats in the house?', ['#InCastle', '#HateRats']));
+photoPosts.addPhotoPost(new Post('AnnaMaria', new Date(1820, 11, 18, 23, 12),'pic/barokko2.jpg',['StefanoGrande'], 'How to get rid of rats in the house?', ['#InCastle', '#HateRats']));
 photoPosts.addPhotoPost(new Post('StefanoGrande',new Date(1810, 10, 16, 20, 12), 'pic/barokko.jpg',['AnnaMaria', 'MarioValentino',], 'War.... war never changes',['#InCastle', '#HateWar']));
 photoPosts.addPhotoPost(new Post('MarioValentino',new Date(1850, 10, 16, 20, 12), 'pic/barokko4.jpg',['AnnaMaria'], 'Again I lost the crop',['#NotInCastle', '#NeedJob', '#GodBlessKing']));
-photoPosts.addPhotoPost(new Post('AnnaMaria', new Date(1810, 10, 16, 20, 12),'pic/barokko3.jpg',['AnnaMaria'], 'War.... war never changes',['#InCastle', '#HateWar']));
+photoPosts.addPhotoPost(new Post('AnnaMaria',new Date(1810, 10, 16, 20, 12),'pic/barokko3.jpg',['AnnaMaria'], 'War.... war never changes',['#InCastle', '#HateWar']));
 photoPosts.addPhotoPost(new Post('StefanoGrande', new Date(1910, 10, 16, 20, 12),'pic/exadel.jpg',['AnnaMaria'], 'War.... war never changes',['#InCastle', '#HateWar']));
 photoPosts.addPhotoPost(new Post('MarioValentino', new Date(1930, 10, 16, 20, 12), 'pic/exadel1.jpg',['AnnaMaria'], 'War.... war never changes',['#InCastle', '#HateWar']));
 photoPosts.addPhotoPost(new Post('StefanoGrande', new Date(1900, 10, 16, 20, 12), 'pic/exadel2.jpg',['AnnaMaria', 'StefanoGrande'], 'War.... war never changes',['#InCastle', '#HateWar']));
@@ -211,6 +211,8 @@ const Users = [
     }
 ]
 
-
-
+if(!localStorage.users) localStorage.users = JSON.stringify(Users);
+if(!localStorage.photoPosts) localStorage.photoPosts = JSON.stringify(photoPosts);
+if(!localStorage.state) localStorage.state="1";
+if(_id) _id = JSON.parse(localStorage.photoPosts).length+1;
 
