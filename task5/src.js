@@ -282,9 +282,9 @@ const dom = (function () {
                 <img class="background" src="${postToEdit.photoLink}">
             </div>
             <div class="post-info">
-                <textarea placeholder="description" defaultValue="${postToEdit.description}" class="description"></textarea>
+                <textarea placeholder="description"  class="description">${postToEdit.description}</textarea>
         
-                <textarea placeholder="#hashtags" defaultValue="${postToEdit.hashTags}" class="hashtags"></textarea>
+                <textarea placeholder="#hashtags"  class="hashtags">${postToEdit.hashTags}</textarea>
             </div>
             `;
             post.getElementsByClassName("DragAndDrop")[0].style.height = "auto";
