@@ -64,7 +64,7 @@ if (_id) _id = JSON.parse(localStorage.photoPosts).length + 1;
 
 function displayPosts() {
     const posts = JSON.parse(localStorage.photoPosts);
-    let feed = document.getElementsByClassName("feed")[0];
+    const feed = document.getElementsByClassName("feed")[0];
     feed.innerHTML = ``;
 
     dom.displayPosts(posts.getPhotoPosts(undefined, undefined, filterConfig));
@@ -139,6 +139,7 @@ function pressLike(id) {
     }
     localStorage.photoPosts = JSON.stringify(posts);
 }
+
 function checkUser() {
     const form = document.forms.logInForm;
     const name = form[0].value;
@@ -209,6 +210,8 @@ function saveEditPost(post) {
     editPhotoPost(post.id, { hashTags, description, photoLink });
 }
 
+
+
 function setFilterFromDate(el) {
     const data = el.value.split(".");
     filterConfig.fromDate = new Date(data[2], data[1] - 1, data[0]), 0, 0;
@@ -234,20 +237,25 @@ function setFilterHashtags(el) {
 }
 
 
+
 function display() {
+
     switch (localStorage.state) {
+
         case "1": {
             DisplayLogIn();
             break;
         }
+
         case "2": {
             DisplayFeed();
             displayPosts();
             dom.displayUserInfo(localStorage.user);
             break;
         }
+        
         case "3": {
-            DisplayAddPage();
+            DisplayAddForm();
             break;
         }
     }

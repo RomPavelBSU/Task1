@@ -1,6 +1,8 @@
 const DisplayEditForm = (post) => {
+    
     const postToEdit = JSON.parse(localStorage.photoPosts).getPhotoPost(post.id);
     const data = new Date(postToEdit.createdAt);
+
     post.innerHTML = ``;
     post.classList.add("addPhotoForm");
     post.style.height = "auto";
@@ -9,7 +11,7 @@ const DisplayEditForm = (post) => {
         <div class="post-upload-data">
             ${data.getHours()}:${data.getMinutes()} / ${data.getDate()}.${data.getMonth() + 1}.${data.getFullYear()}
         </div>
-        <i class="like-icon material-icons" onclick="saveEditPost(this.parentNode.parentNode)">save</i>
+        <i class="save-icon material-icons" onclick="saveEditPost(this.parentNode.parentNode)">save</i>
         <div class="post-username">
             ${localStorage.user}
         </div>
@@ -22,7 +24,7 @@ const DisplayEditForm = (post) => {
     <div class="post-info">
         <textarea placeholder="description"  class="description">${postToEdit.description}</textarea>
 
-        <textarea placeholder="#hashtags"  class="hashtags">${postToEdit.hashTags}</textarea>
+        <textarea placeholder="#hashtags"  class="hashtags">${postToEdit.hashTags.join("\n")}</textarea>
     </div>
     `;
     post.getElementsByClassName("DragAndDrop")[0].style.height = "auto";

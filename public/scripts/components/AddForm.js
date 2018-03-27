@@ -1,11 +1,11 @@
 const DisplayAddForm = () => {
     localStorage.state = "3";
-    let main = document.getElementsByClassName("main")[0];
-    let feed = document.getElementsByClassName("feed")[0];
-    let filters = document.getElementsByClassName("filters-container")[0];
-    let logIN = document.getElementsByClassName("logIN")[0];
-    let btn = document.getElementsByClassName("btn-load-more")[0];
-    let newPost = document.getElementsByClassName("btn-new-post")[0];
+    const main = document.getElementsByClassName("main")[0];
+    const feed = document.getElementsByClassName("feed")[0];
+    const filters = document.getElementsByClassName("filters-container")[0];
+    const logIN = document.getElementsByClassName("logIN")[0];
+    let  btn = document.getElementsByClassName("btn-load-more")[0];
+    const newPost = document.getElementsByClassName("btn-new-post")[0];
 
     if (logIN)
         logIN.remove();
@@ -18,7 +18,7 @@ const DisplayAddForm = () => {
     if (newPost)
         newPost.remove();
 
-    let addPhoto = document.createElement("div");
+    const addPhoto = document.createElement("div");
     addPhoto.classList.add("addPhoto");
     addPhoto.innerHTML = `
     <div class="post-toolbar">
@@ -43,7 +43,7 @@ const DisplayAddForm = () => {
     btn.innerHTML = `add photo`;
     btn.addEventListener("click", pressAddPost);
 
-    let form = document.createElement("form");
+    const form = document.createElement("form");
     form.classList.add("addPhotoForm");
     form.appendChild(addPhoto);
     form.appendChild(btn);

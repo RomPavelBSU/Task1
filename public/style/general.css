@@ -1,0 +1,272 @@
+    *{
+        font-family: 'Timmana', sans-serif; 
+        outline:none; 
+    }
+
+    body, html{
+        height: 100%;
+    margin: 0px 0px 0px 0px;
+    
+    }
+    .main{
+        min-height: 100%  ;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+ 
+    .material-icons, .btn{
+        cursor: pointer;
+        user-select: none;
+    }
+    .btn{
+        font-size:20px;
+        padding-top: 5px;
+        border-radius: 10px;
+        color: white;
+        width: 100px;
+        height: 40px;
+        
+        margin:auto;
+    }
+
+    ::-webkit-input-placeholder {
+        color:rgba(0, 0, 0, 0.336);
+    }
+  
+   
+
+
+
+    .header{
+        position: fixed;
+        top:0;
+        width: 100%;
+        height: 70px;
+        border:2px solid #3d051b23;
+        border-radius: 4px;
+        background-color: white;
+        display:flex; 
+        justify-content: space-between;
+        z-index:100;
+    }
+    
+    .user-info{
+        width:100px;
+        margin:6px auto 0px 10px;
+        font-size: 17px;
+        color:rgba(0, 0, 0, 0.767);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .user-logo{
+        font-size: 35px;
+    }
+    
+    .btn-new-post{
+        background-color:#3d051bc0;  
+    }
+    .btn-sign-out, .btn-sign-in{
+        background-color:#00a5d383;
+    }
+  
+   
+
+
+
+    .feed{
+        align-items: center;
+        min-height: 80%;
+        flex: 1 0 auto;
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:100px;
+        display:flex;
+        flex-direction: column;
+    }
+    
+    .btn-load-more{
+        margin-bottom: 80px;
+        background: white;
+        border: 3px solid #3d051bc0 ;
+        color: #3d051bc0;
+    }
+    .btn-load-more:hover{
+        background: #3d051b17;
+    }
+    
+    
+    
+
+    .filters-container{
+        position:fixed;
+        margin-top:130px;
+        margin-left:75%;
+        margin-right:10%;
+        width: 220px;
+        color:rgba(0, 0, 0, 0.637);
+        font-size: 40px;
+        display: flex;
+        flex-direction: column;
+        z-index:100;
+    }
+    
+    .filter{
+        padding-top: 3px;
+        margin: 10px 0px 10px 0px;
+        border-radius: 10px;
+        color: rgb(0, 0, 0);
+    }
+    .filters-by-date{
+        align-items: center;
+        font-size:15px;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .filt-by-date{
+        margin:10px 5px 10px 5px;
+        width: 75px;
+    }
+
+
+
+
+
+    .footer{
+        background-color:  #3d051b09;
+        flex: 0 0  auto;
+        height:100px;
+        width:100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .photogram-name{
+        height:70px;
+        margin:auto auto auto 10px;
+        width: 30%;
+        font-size:50px;
+        color: #004e63
+    }
+    .photogram-logo{
+        margin: 4px 10px 4px auto;
+        border: 0px;
+        width:100px;
+    
+    }
+    
+    .update-string{
+        margin: 70px auto auto auto;
+        align-self: auto;
+        font-size: 15px;
+        color: #003748c0
+    }
+    .contacts-info{
+        display: flex;
+        width: 30%;
+        flex-direction: column;
+        margin:auto;
+        margin-right: 10px;
+        color:rgba(0, 0, 0, 0.651);
+    }
+    .contacts-info *{
+        font-size: 15px;
+        text-align: end;
+        margin: 2px 0px 0px 0px;
+    }
+
+   
+  
+
+
+
+
+
+
+    @media screen and (max-width: 950px) { 
+        .feed{
+            margin-top:140px;
+        } 
+          .update-string,
+          .filt-cont-text
+        {
+              display:none;
+        } 
+        .filters-container{
+          margin: 70px 0 0 0;
+          width: 100%;
+          background-color: white;
+          border:2px solid #3d051b23;
+          border-radius: 2px;
+          flex-direction: row;
+          justify-content: space-around;
+        }
+        .filter{
+            width:30%;
+        }
+        .filters-by-date{
+            width:30%;
+        }
+        .filt-by-date{
+            margin:0;
+            width: 50%;
+       
+        }
+   
+      
+    }
+    @media screen and (max-width: 610px) { 
+ 
+        .post{
+            width:80%;
+        }
+        img{
+            width:100%;
+        }
+        .photogram-name{
+            margin-left: 5%;
+            font-size: 45px;
+        }
+        .feed{
+            margin-top:160px;
+            width: 90%;
+        } 
+
+        .addPhotoForm{
+            width: 80%;
+        }
+        .delete-icon,.edit-icon{
+            font-size: 22px;
+        }
+        .like-icon{
+            font-size: 25px;
+        }
+        .post-toolbar{
+            font-size:13px;
+        }
+        .filters-by-date{
+            flex-direction: column;
+            font-size: 0px;
+        }
+        .filt-by-date{
+            
+            width: 100%;
+            margin-bottom:2px;
+            margin-top: 2px;
+        }
+          .photogram-logo,  
+          .contacts-info * {
+              display:none;
+          }
+          .btn-sign-out{
+              margin-right: 10px;
+          }
+        .welcomeText{
+            font-size:40px;
+        }
+    }
+
+
+
