@@ -9,6 +9,7 @@
 .username, .password{
     width:250px;
     padding-top: 3px;
+    padding-left: 5px;
     margin: 10px 0px 10px 0px;
     border-radius: 10px;
     color: rgb(0, 0, 0);

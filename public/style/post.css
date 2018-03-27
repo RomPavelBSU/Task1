@@ -7,6 +7,7 @@
     padding: 10px 20px 10px 20px;
     border-radius: 10px;
     background-color: #3d051b17;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 .post-toolbar{
      display: flex;
@@ -21,9 +22,12 @@
 }
 .like-icon{
     align-self: auto;
-    color:rgb(150, 3, 3);
+    color:rgba(150, 3, 3, 0.822);
     width:7%;
     font-size: 30px;
+}
+.like-icon:hover{
+    color:rgb(150, 3, 3);
 }
 .post-upload-data{
     padding-top:5px;
@@ -37,17 +41,18 @@
    color:black;
    flex: 0;
 }
-.delete-icon{
+.delete-icon, .edit-icon{
     width:20%;
     font-size: 30px;
-    color:rgba(0, 0, 0, 0.623);
+    color:#00000098;
 }
-.edit-icon{
-    width:20%;
-    color:rgba(0, 0, 0, 0.623);
-    font-size: 30px;
+.delete-icon:hover{
+    color:#000000c0;
 }
 
+.edit-icon:hover{
+    color:#000000c4;
+}
 
 img{
     max-height: 400px;

@@ -43,12 +43,12 @@
         top:0;
         width: 100%;
         height: 70px;
-        border:2px solid #3d051b23;
-        border-radius: 4px;
         background-color: white;
         display:flex; 
         justify-content: space-between;
         z-index:100;
+        border-bottom: 2px solid #3d051b23;
+        box-shadow: 0 0 5px #3d051b23;
     }
     
     .user-info{
@@ -102,15 +102,16 @@
 
     .filters-container{
         position:fixed;
-        margin-top:130px;
-        margin-left:75%;
-        margin-right:10%;
+        margin:130px 10% 0 75%;
         width: 220px;
         color:rgba(0, 0, 0, 0.637);
         font-size: 40px;
         display: flex;
         flex-direction: column;
         z-index:100;
+        box-shadow: 0 0 10px rgba(0,0,0,0.4);
+        border-radius: 10px;
+        padding:10px;
     }
     
     .filter{
@@ -137,11 +138,12 @@
     .footer{
         background-color:  #3d051b09;
         flex: 0 0  auto;
-        height:100px;
+        min-height:100px;
         width:100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
     }
     .photogram-name{
         height:70px;
@@ -186,6 +188,9 @@
 
 
     @media screen and (max-width: 950px) { 
+        .header{
+            box-shadow: none;
+        }
         .feed{
             margin-top:140px;
         } 
@@ -196,12 +201,15 @@
         } 
         .filters-container{
           margin: 70px 0 0 0;
+          padding: 0;
           width: 100%;
           background-color: white;
           border:2px solid #3d051b23;
           border-radius: 2px;
           flex-direction: row;
           justify-content: space-around;
+          box-shadow: none;
+          border-radius: 0;
         }
         .filter{
             width:30%;
@@ -219,16 +227,26 @@
     }
     @media screen and (max-width: 610px) { 
  
+        .footer{
+            flex-direction: column;
+        }
+        .footer *{
+            margin:auto;
+            width:auto;
+        }
+        .contacts-info{
+            margin-top:20px;
+        }
+        .update-string{
+            display:block;
+        } 
         .post{
             width:80%;
         }
         img{
             width:100%;
         }
-        .photogram-name{
-            margin-left: 5%;
-            font-size: 45px;
-        }
+
         .feed{
             margin-top:160px;
             width: 90%;
@@ -256,8 +274,7 @@
             margin-bottom:2px;
             margin-top: 2px;
         }
-          .photogram-logo,  
-          .contacts-info * {
+          .photogram-logo{
               display:none;
           }
           .btn-sign-out{

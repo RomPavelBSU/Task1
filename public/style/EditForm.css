@@ -24,7 +24,7 @@ textarea{
     width: 100%;
 }
 .DragAndDrop{
-    height:100px;
+    height:250px;
     border-radius: 10px;
     background: white;
     border: 2px dashed #3d051b49;
@@ -49,7 +49,10 @@ textarea{
 }
 
 .save-icon{
-    color:rgb(150, 3, 3);
+    color:rgba(150, 3, 3, 0.733);
     font-size: 30px;
     margin-right: 25%;
+}
+.save-icon:hover{
+    color:rgb(150, 3, 3);
 }

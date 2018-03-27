@@ -65,10 +65,18 @@ if (_id) _id = JSON.parse(localStorage.photoPosts).length + 1;
 function displayPosts() {
     const posts = JSON.parse(localStorage.photoPosts);
     const feed = document.getElementsByClassName("feed")[0];
+
     feed.innerHTML = ``;
 
     dom.displayPosts(posts.getPhotoPosts(undefined, undefined, filterConfig));
-    document.getElementsByClassName("btn-load-more")[0].style.display = "block";
+    const actuall_amount = document.getElementsByClassName("post").length;
+
+    if (posts.getPhotoPosts(0, posts.length, filterConfig).length - actuall_amount === 0) {
+        document.getElementsByClassName("btn-load-more")[0].style.display = "none";
+    }
+    else {
+        document.getElementsByClassName("btn-load-more")[0].style.display = "block";
+    }
 }
 
 function addPhotoPost(post) {
@@ -76,13 +84,13 @@ function addPhotoPost(post) {
     if (posts.addPhotoPost(post)) {
         localStorage.photoPosts = JSON.stringify(posts);
     }
-    let feed = document.getElementsByClassName("feed")[0];
+    const feed = document.getElementsByClassName("feed")[0];
     feed.innerHTML = ``;
 
     localStorage.state = "2";
     dom.displayPosts(posts.getPhotoPosts());
 
-    let actuall_amount = document.getElementsByClassName("post").length;
+    const actuall_amount = document.getElementsByClassName("post").length;
     if (actuall_amount < posts.length)
         document.getElementsByClassName("btn-load-more")[0].style.display = "block";
     else return false;
@@ -93,7 +101,7 @@ function removePhotoPost(id) {
         localStorage.photoPosts = JSON.stringify(posts);
         if (dom.removePhotoPost(id)) {
 
-            let actuall_amount = document.getElementsByClassName("post").length;
+            const actuall_amount = document.getElementsByClassName("post").length;
             if (actuall_amount < posts.getPhotoPosts(0, posts.length, filterConfig).length)
                 dom.displayPosts([posts.getPhotoPosts(actuall_amount, 1, filterConfig)[0]]);
             if (posts.length <= actuall_amount + 1)
@@ -116,9 +124,9 @@ function editPhotoPost(id, newPost) {
 }
 function pressLoadMoreButton() {
     const posts = JSON.parse(localStorage.photoPosts);
-    let actuall_amount = document.getElementsByClassName("post").length;
+    const actuall_amount = document.getElementsByClassName("post").length;
     if (actuall_amount < posts.getPhotoPosts(0, posts.length, filterConfig).length) {
-        if (posts.getPhotoPosts(0, photoPosts.length, filterConfig).length - actuall_amount <= 10)
+        if (posts.getPhotoPosts(0, posts.length, filterConfig).length - actuall_amount <= 10)
             document.getElementsByClassName("btn-load-more")[0].style.display = "none";
         dom.displayPosts(posts.getPhotoPosts(actuall_amount, undefined, filterConfig));
     }
@@ -186,13 +194,22 @@ function checkUser() {
 }
 
 function pressAddPost() {
-    let hashTags = document.querySelector(`textarea[class="hashtags"]`).value.split(" ");
-    let description = document.querySelector(`textarea[class="description"]`).value || "";
-    let photoLink = "pic/" + document.getElementsByClassName("DragDropInput")[0].files[0].name;
-    document.getElementsByClassName("main")[0].style.margin = "0";
-    DisplayFeed();
-    let data = new Date();
+    const hashTags = document.querySelector(`textarea[class="hashtags"]`).value.split(" ");
+    const description = document.querySelector(`textarea[class="description"]`).value || "";
+    let photoLink;
+    const input = document.getElementsByClassName("DragDropInput")[0].files[0];
 
+    if (input) {
+        photoLink = "pic/" + input.name;
+    }
+    else {
+        return;
+    }
+    document.getElementsByClassName("main")[0].style.margin = "0";
+
+    DisplayFeed();
+
+    let data = new Date();
     addPhotoPost(new Post(localStorage.user, data, photoLink, [], description, hashTags));
 }
 function saveEditPost(post) {
@@ -253,7 +270,7 @@ function display() {
             dom.displayUserInfo(localStorage.user);
             break;
         }
-        
+
         case "3": {
             DisplayAddForm();
             break;
