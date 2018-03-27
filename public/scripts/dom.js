@@ -104,11 +104,11 @@ const dom = (function () {
             return element;
         },
 
-        displayPhoto(input) {
+        displayPhoto(form) {
 
-            document.getElementsByClassName("DragAndDrop")[0].style.height = "auto";
-            document.getElementsByClassName("background")[0].src = `pic/${input.files[0].name}`
-            document.querySelector(".DragDropText").style.color = "#00a5d383";
+            form.style.height = "auto";
+            form.getElementsByClassName("background")[0].src = URL.createObjectURL(form.getElementsByTagName("input")[0].files[0]);
+            form.querySelector(".DragDropText").style.color = "#00a5d383";
 
         }
 

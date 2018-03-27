@@ -28,7 +28,7 @@ const DisplayAddForm = () => {
     </div>
     <div class="DragAndDrop">
         <div class ="DragDropText">Drag here or <i>click</i></div>
-        <input class="DragDropInput" type="file" accept="image/*" onchange="dom.displayPhoto(this)" > 
+        <input class="DragDropInput" type="file" accept="image/*" onchange="dom.displayPhoto(this.parentNode)" > 
         <img class="background">
     </div>
     <div class="post-info">

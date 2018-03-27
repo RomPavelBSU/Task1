@@ -16,8 +16,9 @@ const ServerModule = (function () {
                             return false;
                     }
                     if (filterConfig.hashTags.length!==0) {
+                        const hashTags = post.hashTags.join(" ")
                         if (!filterConfig.hashTags.every((tag) => {
-                            return post.hashTags.includes(tag);
+                            return ~hashTags.indexOf(tag);
                         }))
                             return false;
                     }
