@@ -51,3 +51,29 @@ const DisplayAddForm = () => {
     main.insertBefore(form, main.childNodes[1]);
     document.getElementsByClassName("main")[0].style.margin = "70px 0 0 0";
 }
+
+
+
+
+
+
+
+function pressAddPost() {
+    const hashTags = document.querySelector(`textarea[class="hashtags"]`).value.split(" ");
+    const description = document.querySelector(`textarea[class="description"]`).value || "";
+    let photoLink;
+    const input = document.getElementsByClassName("DragDropInput")[0].files[0];
+
+    if (input) {
+        photoLink = "pic/" + input.name;
+    }
+    else {
+        return;
+    }
+    document.getElementsByClassName("main")[0].style.margin = "0";
+
+    DisplayFeed();
+
+    const data = new Date();
+    addPhotoPost(new Post(localStorage.user, data, photoLink, [], description, hashTags));
+}

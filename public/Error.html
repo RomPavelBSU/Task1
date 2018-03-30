@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Photogram</title>
+    <link rel="shortcut icon" href="pic/small_logo.jpg" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Timmana" rel="stylesheet">
+
+    <style>
+     *{
+        font-family: 'Timmana', sans-serif; 
+        outline:none; 
+    }
+
+    body, html{
+        height: 100%;
+    margin: 0px 0px 0px 0px;
+    
+    }
+    .main{
+        min-height: 100%  ;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    .error-block{
+        width:300px;
+        height: 200px;
+        margin:auto;
+        border-radius: 20px;
+        background: #ece6e8;
+        text-align:center;
+        position: relative;
+    }
+    .error-block::after {
+        content: ''; 
+        position: absolute; 
+        left: 20px;
+        bottom: -20px; 
+        border: 10px solid transparent; 
+        border-top: 10px solid #ece6e8; 
+    }
+    .link-main-page{
+        user-select: none;
+        cursor: pointer;
+        font-size:20px;
+        padding-top: 5px;
+        border-radius: 20px;
+        color: white;
+        width: 200px;
+        height: 40px;
+        background-color:#00a5d383;
+        text-align: center;
+        margin:auto;
+
+    }
+    .footer{
+        background-color:  #3d051b09;
+        flex: 0 0  auto;
+        min-height:100px;
+        width:100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    .photogram-name{
+        height:70px;
+        margin:auto auto auto 10px;
+        width: 30%;
+        font-size:50px;
+        color: #004e63
+    }
+    .photogram-logo{
+        margin: 4px 10px 4px auto;
+        border: 0px;
+        width:100px;
+    
+    }
+    
+    .update-string{
+        margin: 70px auto auto auto;
+        align-self: auto;
+        font-size: 15px;
+        color: #003748c0
+    }
+    .contacts-info{
+        display: flex;
+        width: 30%;
+        flex-direction: column;
+        margin:auto;
+        margin-right: 10px;
+        color:rgba(0, 0, 0, 0.651);
+    }
+    .contacts-info *{
+        font-size: 15px;
+        text-align: end;
+        margin: 2px 0px 0px 0px;
+    }
+    @media screen and (max-width: 610px) { 
+ 
+        .footer{
+            flex-direction: column;
+        }
+        .footer *{
+            margin:auto;
+            width:auto;
+        }
+        .contacts-info{
+            margin-top:20px;
+        }
+        .update-string{
+            display:block;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }  
+}
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main"> 
+
+        <div class="error-block"> Oops smth wents wrong</div>
+        <a class = "link-main-page" href="index.html">return to main page</a>
+
+        <div class="footer">
+            <div class="photogram-name">
+                #PHOTOGRAM
+            </div>
+            <div class="update-string">
+                Last Update: 27/03/2018
+            </div>
+            <div class="contacts-info">
+                <p>Contacts: Pavel Ramasheuski Group:5</p>
+                <p>Email: pavel.ramasheusi@gmail.com</p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>

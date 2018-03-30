@@ -51,8 +51,11 @@ textarea{
 .save-icon{
     color:rgba(150, 3, 3, 0.733);
     font-size: 30px;
-    margin-right: 25%;
 }
 .save-icon:hover{
     color:rgb(150, 3, 3);
+}
+
+.edit-username{
+    width:45% ;
 }

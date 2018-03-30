@@ -29,3 +29,55 @@ const DisplayLogIn = () => {
             `;
     main.insertBefore(logIN, main.childNodes[1]);
 }
+
+
+
+
+
+
+
+
+function checkUser() {
+    const form = document.forms.logInForm;
+    const name = form[0].value;
+    const password = form[1].value;
+    let error = document.getElementsByClassName("error")[0];
+
+    const users = JSON.parse(localStorage.users);
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].username === name) {
+            if (users[i].password === password) {
+                if (error) {
+                    error.remove();
+                }
+                localStorage.user = name;
+                DisplayFeed();
+                displayPosts();
+                dom.displayUserInfo(localStorage.user);
+                return true;
+            }
+            else {
+                if (!error) {
+                    let error = document.createElement("div");
+                    error.classList.add("error");
+                    error.innerHTML = `wrong password`;
+                    form.insertBefore(error, form[2]);
+                }
+                else {
+                    error.innerHTML = `wrong password`;
+                }
+                return false;
+            }
+        }
+    }
+    if (!error) {
+        let error = document.createElement("div");
+        error.classList.add("error");
+        error.innerHTML = `wrong all`;
+        form.insertBefore(error, form[2]);
+    }
+    else {
+        error.innerHTML = `wrong all`;
+    }
+    return false;
+}

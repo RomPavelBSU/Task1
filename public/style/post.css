@@ -36,10 +36,9 @@
 }
 .post-username{
 
-   text-align: center;
+   text-align: end;
    padding-top:5px;
    color:black;
-   flex: 0;
 }
 .delete-icon, .edit-icon{
     width:20%;

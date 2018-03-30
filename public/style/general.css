@@ -239,6 +239,8 @@
         }
         .update-string{
             display:block;
+            margin-top: 70px;
+            margin-bottom: 40px;
         } 
         .post{
             width:80%;
