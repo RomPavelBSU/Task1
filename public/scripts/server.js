@@ -23,11 +23,11 @@ const ServerModule = (function () {
                             return false;
                     }
                     if (filterConfig.fromDate!=="") {
-                        if (new Date(post.createdAt) - filterConfig.fromDate <= 0)
+                        if (new Date(post.createdAt) - new Date(filterConfig.fromDate) <= 0)
                             return false;
                     }
                     if (filterConfig.toDate!=="") {
-                        if (filterConfig.toDate - new Date(post.createdAt) <= 0)
+                        if (new Date(filterConfig.toDate) - new Date(post.createdAt) <= 0)
                             return false;
                     }
 
@@ -161,4 +161,4 @@ const ServerModule = (function () {
 
 
 
-
+module.exports = ServerModule;

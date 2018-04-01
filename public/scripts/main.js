@@ -54,7 +54,7 @@ photoPosts.addPhotoPost(new Post('AnnaMaria', new Date(1950, 10, 16, 20, 12), 'p
 photoPosts.addPhotoPost(new Post('StefanoGrande', new Date(1990, 10, 16, 20, 12), 'pic/order.jpg', ['AnnaMaria'], 'War.... war never changes', ['#InCastle', '#HateWar']));
 photoPosts.addPhotoPost(new Post('AnnaMaria', new Date(2000, 10, 16, 20, 12), 'pic/exadel2.jpg', ['AnnaMaria'], 'War.... war never changes', ['#InCastle', '#HateWar']));
 
-
+console.log(JSON.stringify(photoPosts));
 if (!localStorage.users) localStorage.users = JSON.stringify(Users);
 if (!localStorage.photoPosts) localStorage.photoPosts = JSON.stringify(photoPosts);
 if (!localStorage.state) localStorage.state = "1";
