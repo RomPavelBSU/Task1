@@ -3,9 +3,9 @@ const path = './server/posts.json';
 const methods = require('./public/scripts/server.js');
 const fs = require('fs');
 
-const express = require('express'),
-	bodyParser = require('body-parser'),
-	app = express();
+const  express = require('express'),
+    bodyParser = require('body-parser'),
+	       app = express();
 
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -17,17 +17,16 @@ for(method in methods){
 }
 
 
-app.put('/posts', (req, res)=>{
+app.post('/posts', (req, res)=>{
 	const allPosts = JSON.parse(fs.readFileSync(path));
-    const configs = req.body;
+	const configs = req.body;
 	const posts = allPosts.getPhotoPosts(Number(configs.skip), Number(configs.top), configs.filterConfig);
-	console.log(posts);
 	if(posts){
 		res.send(JSON.stringify(posts));
 		res.statusCode = 200;
 	}
 	else{
-		res.send('olala2');
+		res.send('error');
 		res.statusCode = 400;
 	}
 })
@@ -39,12 +38,13 @@ app.post('/post', (req, res) => {
 	post.createdAt = new Date(post.createdAt);
 
 	if (posts.addPhotoPost(post)) {
-		fs.writeFile(path, JSON.stringify(posts));
+		fs.writeFileSync(path, JSON.stringify(posts));
+		res.send('good');
 		res.statusCode=200;
 	}
 
 	else {
-		res.send("olala2");
+		res.send("error");
 		res.statusCode=400;
 	}
 })
@@ -60,7 +60,7 @@ app.get('/post/:id', (req, res) => {
 	}
 
 	else {
-		res.send("olala2");
+		res.send("error");
 		res.statusCode=400;
 	}
 })
@@ -72,13 +72,13 @@ app.put('/post/:id', (req, res) => {
 	const id = `${req.params.id}`;
     console.log(id, editPost);
 	if (posts.editPhotoPost(id, editPost)) {
-		res.send("olala1");
-		fs.writeFile(path, JSON.stringify(posts));
+		res.send("good");
+		fs.writeFileSync(path, JSON.stringify(posts));
 		res.statusCode=200;
 	}
 
 	else {
-		res.send("olala2");
+		res.send("error");
 		res.statusCode=400;
 	}
 })
@@ -88,12 +88,12 @@ app.delete('/post/:id', (req, res)=>{
 	const id = `${req.params.id}`;
 
 	if(posts.removePhotoPost(id)){
-		res.send("olala1");
-		fs.writeFile(path, JSON.stringify(posts));
+		res.send("good");
+		fs.writeFileSync(path, JSON.stringify(posts));
 		res.statusCode=200;
 	}
 	else{
-		res.send("olala2");
+		res.send("error");
 		res.statusCode=400;
 	}
 })

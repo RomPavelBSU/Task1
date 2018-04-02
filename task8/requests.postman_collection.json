@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "561965ac-478d-4eb2-b117-88a9d936b738",
+		"name": "requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/posts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"skip\":\"3\", \"top\":\"2\"}"
+				},
+				"url": {
+					"raw": "localhost:3000/posts",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":\"777\",\"description\":\"123\",\"createdAt\":\"2000-11-16T17:12:00.000Z\",\"author\":\"Rom\",\"hashTags\":[\"#1\"],\"likes\":[],\"photoLink\":\"123\"}"
+				},
+				"url": {
+					"raw": "localhost:3000/post",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/post/777",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":\"777\",\"description\":\"123\",\"createdAt\":\"2000-11-16T17:12:00.000Z\",\"author\":\"Rom\",\"hashTags\":[\"#1\"],\"likes\":[],\"photoLink\":\"123\"}"
+				},
+				"url": {
+					"raw": "localhost:3000/post/777",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post",
+						"777"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/post/777",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"new\",\"hashTags\":[\"#new\"],\"likes\":[],\"photoLink\":\"new\"}"
+				},
+				"url": {
+					"raw": "localhost:3000/post/777",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post",
+						"777"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/post/777",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/post/777",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post",
+						"777"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
